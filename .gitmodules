@@ -1,0 +1,30 @@
+[submodule "arcanea-intelligence-os"]
+	path = arcanea-intelligence-os
+	url = https://github.com/frankxai/arcanea-intelligence-os.git
+[submodule "arcanea-mobile"]
+	path = arcanea-mobile
+	url = https://github.com/frankxai/arcanea-mobile.git
+[submodule "arcanea"]
+	path = arcanea
+	url = https://github.com/frankxai/arcanea.git
+[submodule "claude-arcanea"]
+	path = claude-arcanea
+	url = https://github.com/frankxai/claude-arcanea.git
+[submodule "codex-arcanea"]
+	path = codex-arcanea
+	url = https://github.com/frankxai/codex-arcanea.git
+[submodule "gemini-arcanea"]
+	path = gemini-arcanea
+	url = https://github.com/frankxai/gemini-arcanea.git
+[submodule "claude-code-oracle-skills"]
+	path = claude-code-oracle-skills
+	url = https://github.com/frankxai/claude-code-oracle-skills.git
+[submodule "labs"]
+	path = labs
+	url = https://github.com/Arcanea-Labs/Arcanea.git
+[submodule "infogenius"]
+	path = infogenius
+	url = https://github.com/frankxai/infogenius.git
+[submodule "arcanea-infogenius"]
+	path = arcanea-infogenius
+	url = https://github.com/frankxai/arcanea-infogenius.git
