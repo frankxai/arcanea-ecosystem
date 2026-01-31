@@ -1,0 +1,110 @@
+{
+  "ecosystem": "Arcanea",
+  "version": "1.0.0",
+  "description": "Master repository index for Arcanea projects",
+  "updated": "2026-01-31",
+  "repositories": {
+    "core": [
+      {
+        "name": "arcanea",
+        "path": "arcanea",
+        "url": "https://github.com/frankxai/arcanea.git",
+        "description": "Main Arcanea ecosystem hub",
+        "branch": "local-work-sync",
+        "priority": "critical"
+      },
+      {
+        "name": "arcanea-infogenius",
+        "path": "arcanea-infogenius",
+        "url": "https://github.com/frankxai/arcanea-infogenius.git",
+        "description": "Information intelligence system",
+        "branch": "main",
+        "priority": "high"
+      },
+      {
+        "name": "arcanea-intelligence-os",
+        "path": "arcanea-intelligence-os",
+        "url": "https://github.com/frankxai/arcanea-intelligence-os.git",
+        "description": "Operating system for AI agents",
+        "branch": "master",
+        "priority": "high"
+      },
+      {
+        "name": "arcanea-mobile",
+        "path": "arcanea-mobile",
+        "url": "https://github.com/frankxai/arcanea-mobile.git",
+        "description": "Mobile application development",
+        "branch": "master",
+        "priority": "medium"
+      }
+    ],
+    "ai_integrations": [
+      {
+        "name": "claude-arcanea",
+        "path": "claude-arcanea",
+        "url": "https://github.com/frankxai/claude-arcanea.git",
+        "description": "Claude AI platform integration",
+        "branch": "master",
+        "priority": "high"
+      },
+      {
+        "name": "claude-code-oracle-skills",
+        "path": "claude-code-oracle-skills",
+        "url": "https://github.com/frankxai/claude-code-oracle-skills.git",
+        "description": "Oracle skills for Claude Code",
+        "branch": "main",
+        "priority": "high"
+      },
+      {
+        "name": "codex-arcanea",
+        "path": "codex-arcanea",
+        "url": "https://github.com/frankxai/codex-arcanea.git",
+        "description": "OpenAI Codex integration",
+        "branch": "master",
+        "priority": "medium"
+      },
+      {
+        "name": "gemini-arcanea",
+        "path": "gemini-arcanea",
+        "url": "https://github.com/frankxai/gemini-arcanea.git",
+        "description": "Google Gemini integration",
+        "branch": "master",
+        "priority": "medium"
+      }
+    ],
+    "supporting": [
+      {
+        "name": "infogenius",
+        "path": "infogenius",
+        "url": "https://github.com/frankxai/infogenius.git",
+        "description": "Information management system",
+        "branch": "main",
+        "priority": "medium"
+      },
+      {
+        "name": "labs",
+        "path": "labs",
+        "url": "https://github.com/Arcanea-Labs/Arcanea.git",
+        "description": "Arcanea Labs experimental work",
+        "branch": "main",
+        "priority": "medium",
+        "owner": "Arcanea-Labs"
+      }
+    ]
+  },
+  "dependencies": {
+    "arcanea-intelligence-os": ["claude-arcanea", "claude-code-oracle-skills", "codex-arcanea", "gemini-arcanea"],
+    "arcanea-infogenius": ["infogenius"],
+    "labs": ["arcanea", "arcanea-intelligence-os"]
+  },
+  "scripts": {
+    "clone": "./scripts/clone-all.sh",
+    "sync": "./scripts/sync-all.sh",
+    "status": "./scripts/status-all.sh"
+  },
+  "automation": {
+    "daily_sync": true,
+    "pr_on_updates": true,
+    "status_checks": true
+  }
+}

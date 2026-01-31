@@ -1,0 +1,36 @@
+name: Sync Submodules
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Update submodules
+      run: |
+        git submodule update --remote --merge
+        git add .
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        git commit -m "chore: Update submodules [automated]"
+        git push
+    
+    - name: Create PR if needed
+      if: failure()
+      uses: peter-evans/create-pull-request@v5
+      with:
+        title: 'chore: Submodule updates available'
+        body: 'Automated submodule updates detected'
+        branch: 'automated/submodule-updates'
