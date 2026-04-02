@@ -1,110 +1,227 @@
 {
   "ecosystem": "Arcanea",
-  "version": "1.0.0",
-  "description": "Master repository index for Arcanea projects",
-  "updated": "2026-01-31",
+  "version": "2.0.0",
+  "description": "Portfolio registry for Arcanea platform, orchestration, runtimes, and vertical products",
+  "updated": "2026-04-03",
   "repositories": {
-    "core": [
+    "platform": [
       {
         "name": "arcanea",
         "path": "arcanea",
+        "mode": "submodule",
         "url": "https://github.com/frankxai/arcanea.git",
-        "description": "Main Arcanea ecosystem hub",
-        "branch": "local-work-sync",
-        "priority": "critical"
-      },
-      {
-        "name": "arcanea-infogenius",
-        "path": "arcanea-infogenius",
-        "url": "https://github.com/frankxai/arcanea-infogenius.git",
-        "description": "Information intelligence system",
+        "description": "Main Arcanea platform and control plane",
         "branch": "main",
-        "priority": "high"
-      },
-      {
-        "name": "arcanea-intelligence-os",
-        "path": "arcanea-intelligence-os",
-        "url": "https://github.com/frankxai/arcanea-intelligence-os.git",
-        "description": "Operating system for AI agents",
-        "branch": "master",
-        "priority": "high"
+        "priority": "critical",
+        "role": "control-plane"
       },
       {
         "name": "arcanea-mobile",
         "path": "arcanea-mobile",
+        "mode": "submodule",
         "url": "https://github.com/frankxai/arcanea-mobile.git",
-        "description": "Mobile application development",
-        "branch": "master",
-        "priority": "medium"
+        "description": "Mobile application surface",
+        "branch": "main",
+        "priority": "medium",
+        "role": "product-surface"
       }
     ],
-    "ai_integrations": [
+    "orchestration": [
+      {
+        "name": "arcanea-flow",
+        "path": "../arcanea-flow",
+        "mode": "external",
+        "url": "https://github.com/frankxai/arcanea-flow.git",
+        "description": "Arcanea-native orchestration runtime",
+        "branch": "main",
+        "priority": "critical",
+        "role": "orchestration"
+      },
+      {
+        "name": "arcanea-orchestrator",
+        "path": "../arcanea-orchestrator",
+        "mode": "external",
+        "url": "https://github.com/frankxai/arcanea-orchestrator.git",
+        "description": "Multi-agent execution substrate based on Composio Agent Orchestrator",
+        "branch": "main",
+        "priority": "critical",
+        "role": "execution-substrate"
+      }
+    ],
+    "runtimes": [
+      {
+        "name": "arcanea-code",
+        "path": "../arcanea-code",
+        "mode": "external",
+        "url": "https://github.com/frankxai/arcanea-code.git",
+        "description": "Flagship Arcanea coding runtime based on OpenCode",
+        "branch": "dev",
+        "priority": "critical",
+        "role": "runtime"
+      },
+      {
+        "name": "oh-my-arcanea",
+        "path": "../oh-my-arcanea",
+        "mode": "external",
+        "url": "https://github.com/frankxai/oh-my-arcanea.git",
+        "description": "Operator workflow layer for Arcanea runtime usage",
+        "branch": "dev",
+        "priority": "high",
+        "role": "operator-layer"
+      },
+      {
+        "name": "arcanea-opencode",
+        "path": "../arcanea-opencode",
+        "mode": "external",
+        "url": "https://github.com/frankxai/arcanea-opencode.git",
+        "description": "Legacy Arcanea OpenCode compatibility harness",
+        "branch": "dev",
+        "priority": "medium",
+        "role": "compatibility-layer"
+      },
       {
         "name": "claude-arcanea",
         "path": "claude-arcanea",
+        "mode": "submodule",
         "url": "https://github.com/frankxai/claude-arcanea.git",
-        "description": "Claude AI platform integration",
+        "description": "Claude Code Arcanea harness",
         "branch": "master",
-        "priority": "high"
-      },
-      {
-        "name": "claude-code-oracle-skills",
-        "path": "claude-code-oracle-skills",
-        "url": "https://github.com/frankxai/claude-code-oracle-skills.git",
-        "description": "Oracle skills for Claude Code",
-        "branch": "main",
-        "priority": "high"
+        "priority": "high",
+        "role": "runtime-harness"
       },
       {
         "name": "codex-arcanea",
         "path": "codex-arcanea",
+        "mode": "submodule",
         "url": "https://github.com/frankxai/codex-arcanea.git",
-        "description": "OpenAI Codex integration",
+        "description": "Codex Arcanea harness",
         "branch": "master",
-        "priority": "medium"
+        "priority": "high",
+        "role": "runtime-harness"
       },
       {
         "name": "gemini-arcanea",
         "path": "gemini-arcanea",
+        "mode": "submodule",
         "url": "https://github.com/frankxai/gemini-arcanea.git",
-        "description": "Google Gemini integration",
+        "description": "Gemini Arcanea harness",
         "branch": "master",
-        "priority": "medium"
+        "priority": "medium",
+        "role": "runtime-harness"
+      },
+      {
+        "name": "claude-code-oracle-skills",
+        "path": "claude-code-oracle-skills",
+        "mode": "submodule",
+        "url": "https://github.com/frankxai/claude-code-oracle-skills.git",
+        "description": "Claude Code Oracle skill pack",
+        "branch": "main",
+        "priority": "medium",
+        "role": "skills-layer"
       }
     ],
-    "supporting": [
+    "verticals": [
+      {
+        "name": "arcanea-infogenius",
+        "path": "arcanea-infogenius",
+        "mode": "submodule",
+        "url": "https://github.com/frankxai/arcanea-infogenius.git",
+        "description": "Visual intelligence and infographic systems",
+        "branch": "main",
+        "priority": "high",
+        "role": "vertical-product"
+      },
+      {
+        "name": "arcanea-onchain",
+        "path": "../arcanea-onchain",
+        "mode": "external",
+        "url": "https://github.com/frankxai/arcanea-onchain.git",
+        "description": "Economic and onchain layer",
+        "branch": "main",
+        "priority": "high",
+        "role": "vertical-product"
+      },
+      {
+        "name": "arcanea-claw",
+        "path": "../arcanea-claw",
+        "mode": "external",
+        "url": "https://github.com/frankxai/arcanea-claw.git",
+        "description": "Media and creation workflows",
+        "branch": "main",
+        "priority": "medium",
+        "role": "vertical-product"
+      },
       {
         "name": "infogenius",
         "path": "infogenius",
+        "mode": "submodule",
         "url": "https://github.com/frankxai/infogenius.git",
         "description": "Information management system",
         "branch": "main",
-        "priority": "medium"
+        "priority": "medium",
+        "role": "support-system"
       },
       {
         "name": "labs",
         "path": "labs",
+        "mode": "submodule",
         "url": "https://github.com/Arcanea-Labs/Arcanea.git",
-        "description": "Arcanea Labs experimental work",
+        "description": "Experimental and research work",
         "branch": "main",
         "priority": "medium",
-        "owner": "Arcanea-Labs"
+        "role": "research"
+      }
+    ],
+    "legacy_foundation": [
+      {
+        "name": "arcanea-intelligence-os",
+        "path": "arcanea-intelligence-os",
+        "mode": "submodule",
+        "url": "https://github.com/frankxai/arcanea-intelligence-os.git",
+        "description": "Legacy intelligence-os line retained for historical and compatibility context",
+        "branch": "master",
+        "priority": "medium",
+        "role": "legacy-foundation"
       }
     ]
   },
   "dependencies": {
-    "arcanea-intelligence-os": ["claude-arcanea", "claude-code-oracle-skills", "codex-arcanea", "gemini-arcanea"],
-    "arcanea-infogenius": ["infogenius"],
-    "labs": ["arcanea", "arcanea-intelligence-os"]
+    "arcanea": [
+      "arcanea-flow",
+      "arcanea-orchestrator",
+      "arcanea-code",
+      "oh-my-arcanea",
+      "claude-arcanea",
+      "codex-arcanea",
+      "gemini-arcanea",
+      "arcanea-infogenius",
+      "arcanea-onchain",
+      "arcanea-claw"
+    ],
+    "arcanea-flow": [
+      "arcanea-orchestrator",
+      "arcanea-code",
+      "claude-arcanea",
+      "codex-arcanea",
+      "gemini-arcanea"
+    ],
+    "arcanea-orchestrator": [
+      "arcanea-flow"
+    ],
+    "arcanea-code": [
+      "oh-my-arcanea",
+      "arcanea-opencode"
+    ]
+  },
+  "principles": {
+    "source_of_truth": "arcanea",
+    "orchestration_runtime": "arcanea-flow",
+    "execution_substrate": "arcanea-orchestrator",
+    "billing_data_and_graph": "supabase in arcanea",
+    "payment_strategy": "LemonSqueezy before BV if needed, Stripe later as primary long-term rail"
   },
   "scripts": {
-    "clone": "./scripts/clone-all.sh",
-    "sync": "./scripts/sync-all.sh",
-    "status": "./scripts/status-all.sh"
-  },
-  "automation": {
-    "daily_sync": true,
-    "pr_on_updates": true,
-    "status_checks": true
+    "status": "node ./scripts/status-all.mjs",
+    "sync": "node ./scripts/sync-all.mjs"
   }
 }

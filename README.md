@@ -1,142 +1,120 @@
-# Arcanea Ecosystem 🌟
+# Arcanea Ecosystem
 
-> *"The complete Arcanean universe, interconnected."*
+This repository is the portfolio registry for Arcanea.
 
-This is the **master coordination repository** for all Arcanea projects. It uses **Git Submodules** to link all related repositories while keeping them independent.
+It is not the product source of truth. The product source of truth is the
+Arcanea platform repo and the standalone repos around it. This repo exists to:
 
----
+- track which repos matter
+- explain how they fit together
+- provide one place to check status and sync strategy
+- record which repos are submodules here vs externally tracked siblings
 
-## 🚀 Quick Start
+## Current architecture
 
-### Clone Everything
-```bash
-git clone --recursive https://github.com/frankxai/arcanea-ecosystem.git
-cd arcanea-ecosystem
-```
+Arcanea is now a layered system:
 
-### Update All Projects
-```bash
-./scripts/sync-all.sh
-```
+1. `arcanea`
+   - Main platform and control plane
+   - Internal ops UI, health gates, machine readiness, registry, handoffs
 
-### Check Status Everywhere
-```bash
-./scripts/status-all.sh
-```
+2. `arcanea-flow`
+   - Arcanea-native orchestration runtime
+   - Owns orchestration semantics, swarm patterns, agent coordination logic
 
----
+3. `arcanea-orchestrator`
+   - Lower execution substrate based on Composio Agent Orchestrator
+   - Owns worktrees, sessions, fanout, status, and multi-agent execution
 
-## 📦 What's Included
+4. Runtime harnesses
+   - `arcanea-code`
+   - `oh-my-arcanea`
+   - `arcanea-opencode`
+   - `claude-arcanea`
+   - `codex-arcanea`
+   - `gemini-arcanea`
 
-### Core Ecosystem
-- `arcanea/` - Main Arcanea hub
-- `arcanea-infogenius/` - Information intelligence
-- `arcanea-intelligence-os/` - AI Operating System
-- `arcanea-mobile/` - Mobile applications
+5. Vertical products and support systems
+   - `arcanea-infogenius`
+   - `arcanea-onchain`
+   - `arcanea-claw`
+   - `arcanea-mobile`
+   - `infogenius`
+   - `labs`
 
-### AI Platform Integrations
-- `claude-arcanea/` - Claude AI integration
-- `claude-code-oracle-skills/` - Oracle skills for Claude Code
-- `codex-arcanea/` - OpenAI Codex integration
-- `gemini-arcanea/` - Google Gemini integration
+## Arcanea Flow and Codex
 
-### Supporting Systems
-- `infogenius/` - Information management
-- `labs/` - Experimental work (Arcanea-Labs org)
+`arcanea-flow` is not Claude-only.
 
----
+It should be treated as the Arcanea-native orchestration layer for any coding
+runtime that can:
 
-## 📊 Repository Map
+- execute shell commands
+- read/write repos
+- report task state
+- accept structured delegation or task input
 
-```
-arcanea-ecosystem/
-├── arcanea/                    ← Main hub
-├── arcanea-infogenius/
-├── arcanea-intelligence-os/
-├── arcanea-mobile/
-├── claude-arcanea/
-├── claude-code-oracle-skills/
-├── codex-arcanea/
-├── gemini-arcanea/
-├── infogenius/
-├── labs/                       ← Arcanea-Labs org
-├── scripts/                    ← Helper scripts
-├── .github/workflows/          ← Automation
-└── README.md                   ← This file
-```
+That includes Claude Code and Codex.
 
----
+The right model is:
 
-## 🔧 Working with Submodules
+- `arcanea-flow` decides orchestration semantics
+- `arcanea-orchestrator` executes multi-agent worktree operations
+- Claude/Codex/OpenCode/Gemini harnesses provide the actual coding runtime
 
-### Add a new submodule
-```bash
-git submodule add https://github.com/user/repo.git repo-name
-```
+For Codex specifically, the practical integration path is:
 
-### Update all submodules
-```bash
-git submodule update --remote --merge
-```
+1. expose stable CLI commands and machine-readable output from `arcanea-flow`
+2. keep repo targeting, run IDs, and status traces explicit
+3. use `ao` for heavy parallel execution
+4. keep policy, health, and visibility in `arcanea`
 
-### Commit submodule updates
-```bash
-git add .
-git commit -m "Update submodules"
-git push
-```
+## Repository classes
 
----
+This portfolio repo tracks two kinds of repositories:
 
-## 🔄 Sync Strategy
+1. `submodule`
+   - physically nested inside this repo
+   - pinned here by submodule commit
 
-### Daily Workflow
-1. Run `./scripts/sync-all.sh` to pull latest from all repos
-2. Make changes in individual repos
-3. Push changes from individual repos
-4. Update this meta-repo: `git submodule update --remote`
-5. Push meta-repo to record the new state
+2. `external`
+   - sibling repos in the same workspace
+   - tracked here by metadata and scripts, not by submodule pinning
 
-### Automation
-GitHub Actions automatically:
-- Checks submodule status daily
-- Alerts if repos are out of sync
-- Creates PRs for submodule updates
+This is intentional. Not every Arcanea repo should become a submodule here.
 
----
+## Working rules
 
-## 🏗️ Architecture Decisions
+- Do not treat this repo as the place where all development happens.
+- Make code changes in the actual target repo.
+- Update this repo when the portfolio map, strategy, or tracked repo set changes.
+- Update submodule pointers only when you intentionally want to pin a new state.
+- Do not auto-stash and auto-pull across all repos blindly.
 
-**Why submodules?**
-- Each repo remains independently versioned
-- Can pin specific versions for stability
-- Supports cross-repo dependencies
-- Industry standard (Linux kernel uses this)
+## Main files
 
-**Why not a mono-repo?**
-- Different projects have different lifecycles
-- Some repos are forks/templates (research)
-- AI integrations need separate versioning
-- Easier collaboration with different teams
+- `repos.json`
+  - portfolio inventory
+- `docs/ARCANEA_PORTFOLIO_ARCHITECTURE.md`
+  - architecture and orchestration model
+- `scripts/status-all.mjs`
+  - status view across tracked repos
+- `scripts/sync-all.mjs`
+  - cautious sync helper
 
----
+## Current status
 
-## 📚 Documentation
+The active production shape is centered on:
 
-- [Full Architecture Doc](ARCANEA_REPOSITORY_ARCHITECTURE.md)
-- [Repository Inventory](repos.json)
-- [Sync Scripts](scripts/)
+- `arcanea`
+- `arcanea-flow`
+- `arcanea-orchestrator`
+- `arcanea-code`
+- `oh-my-arcanea`
+- `claude-arcanea`
+- `codex-arcanea`
+- `arcanea-infogenius`
+- `arcanea-onchain`
 
----
-
-## 🤝 Contributing
-
-1. Work in individual repos (not this meta-repo)
-2. Push changes to individual repos
-3. Update submodules in this repo
-4. Create PR with submodule updates
-
----
-
-*Last synced: 2026-01-31*  
-*Status: ✅ All repositories connected*
+Submodule pins in this repo still represent an older portfolio subset. That is
+why this repo now tracks both submodule and external repos explicitly.
