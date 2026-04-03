@@ -7,18 +7,18 @@
     "platform": [
       {
         "name": "arcanea",
-        "path": "arcanea",
-        "mode": "submodule",
+        "path": "..",
+        "mode": "external",
         "url": "https://github.com/frankxai/arcanea.git",
         "description": "Main Arcanea platform and control plane",
-        "branch": "main",
+        "branch": "integration/agent-control-plane-unification",
         "priority": "critical",
         "role": "control-plane"
       },
       {
         "name": "arcanea-mobile",
-        "path": "arcanea-mobile",
-        "mode": "submodule",
+        "path": "../arcanea-mobile",
+        "mode": "external",
         "url": "https://github.com/frankxai/arcanea-mobile.git",
         "description": "Mobile application surface",
         "branch": "main",
@@ -81,8 +81,8 @@
       },
       {
         "name": "claude-arcanea",
-        "path": "claude-arcanea",
-        "mode": "submodule",
+        "path": "../claude-arcanea",
+        "mode": "external",
         "url": "https://github.com/frankxai/claude-arcanea.git",
         "description": "Claude Code Arcanea harness",
         "branch": "master",
@@ -91,8 +91,8 @@
       },
       {
         "name": "codex-arcanea",
-        "path": "codex-arcanea",
-        "mode": "submodule",
+        "path": "../codex-arcanea",
+        "mode": "external",
         "url": "https://github.com/frankxai/codex-arcanea.git",
         "description": "Codex Arcanea harness",
         "branch": "master",
@@ -101,8 +101,8 @@
       },
       {
         "name": "gemini-arcanea",
-        "path": "gemini-arcanea",
-        "mode": "submodule",
+        "path": "../gemini-arcanea",
+        "mode": "external",
         "url": "https://github.com/frankxai/gemini-arcanea.git",
         "description": "Gemini Arcanea harness",
         "branch": "master",
@@ -111,8 +111,8 @@
       },
       {
         "name": "claude-code-oracle-skills",
-        "path": "claude-code-oracle-skills",
-        "mode": "submodule",
+        "path": "../claude-code-oracle-skills",
+        "mode": "external",
         "url": "https://github.com/frankxai/claude-code-oracle-skills.git",
         "description": "Claude Code Oracle skill pack",
         "branch": "main",
@@ -123,8 +123,8 @@
     "verticals": [
       {
         "name": "arcanea-infogenius",
-        "path": "arcanea-infogenius",
-        "mode": "submodule",
+        "path": "../arcanea-infogenius",
+        "mode": "external",
         "url": "https://github.com/frankxai/arcanea-infogenius.git",
         "description": "Visual intelligence and infographic systems",
         "branch": "main",
@@ -153,8 +153,8 @@
       },
       {
         "name": "infogenius",
-        "path": "infogenius",
-        "mode": "submodule",
+        "path": "../infogenius",
+        "mode": "external",
         "url": "https://github.com/frankxai/infogenius.git",
         "description": "Information management system",
         "branch": "main",
@@ -163,8 +163,8 @@
       },
       {
         "name": "labs",
-        "path": "labs",
-        "mode": "submodule",
+        "path": "../labs",
+        "mode": "external",
         "url": "https://github.com/Arcanea-Labs/Arcanea.git",
         "description": "Experimental and research work",
         "branch": "main",
@@ -175,8 +175,8 @@
     "legacy_foundation": [
       {
         "name": "arcanea-intelligence-os",
-        "path": "arcanea-intelligence-os",
-        "mode": "submodule",
+        "path": "../arcanea-intelligence-os",
+        "mode": "external",
         "url": "https://github.com/frankxai/arcanea-intelligence-os.git",
         "description": "Legacy intelligence-os line retained for historical and compatibility context",
         "branch": "master",

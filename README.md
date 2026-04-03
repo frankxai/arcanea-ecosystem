@@ -8,7 +8,7 @@ Arcanea platform repo and the standalone repos around it. This repo exists to:
 - track which repos matter
 - explain how they fit together
 - provide one place to check status and sync strategy
-- record which repos are submodules here vs externally tracked siblings
+- provide a pure registry of externally tracked repos without pinning them as submodules
 
 ## Current architecture
 
@@ -69,26 +69,19 @@ For Codex specifically, the practical integration path is:
 3. use `ao` for heavy parallel execution
 4. keep policy, health, and visibility in `arcanea`
 
-## Repository classes
+## Repository model
 
-This portfolio repo tracks two kinds of repositories:
+This repo is now a pure portfolio registry.
 
-1. `submodule`
-   - physically nested inside this repo
-   - pinned here by submodule commit
-
-2. `external`
-   - sibling repos in the same workspace
-   - tracked here by metadata and scripts, not by submodule pinning
-
-This is intentional. Not every Arcanea repo should become a submodule here.
+- It does not pin Arcanea repos as submodules.
+- It points at real repos in the surrounding workspace by metadata only.
+- Status and sync happen through registry scripts, not through gitlinks.
 
 ## Working rules
 
 - Do not treat this repo as the place where all development happens.
 - Make code changes in the actual target repo.
 - Update this repo when the portfolio map, strategy, or tracked repo set changes.
-- Update submodule pointers only when you intentionally want to pin a new state.
 - Do not auto-stash and auto-pull across all repos blindly.
 
 ## Main files
@@ -101,6 +94,8 @@ This is intentional. Not every Arcanea repo should become a submodule here.
   - status view across tracked repos
 - `scripts/sync-all.mjs`
   - cautious sync helper
+- `scripts/clone-all.sh`
+  - optional workspace bootstrap helper from registry metadata
 
 ## Current status
 
@@ -117,4 +112,4 @@ The active production shape is centered on:
 - `arcanea-onchain`
 
 Submodule pins in this repo still represent an older portfolio subset. That is
-why this repo now tracks both submodule and external repos explicitly.
+why this repo was converted to a pure registry model instead.
