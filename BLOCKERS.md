@@ -2,38 +2,42 @@
 
 Things I could not resolve autonomously overnight. Ordered by leverage. Each has the exact action.
 
-## 1. Grant `workflow` scope so CI can land (30 sec) — unlocks 4 repos
+## 1. ~~Grant `workflow` scope~~ ✅ RESOLVED 2026-06-04
 
-The `gh` token has `repo, read:org, gist` but **not `workflow`**, so GitHub rejected every push
-that adds `.github/workflows/*.yml`. The CI files are **written and waiting on disk** in:
-`claude-code-hooks`, `mcp-doctor`, `agentic-creator-os` (and one ready for SIS).
+Frank granted `workflow` scope. CI workflows committed + pushed. **Live status:**
+- `claude-code-hooks` — CI **green** (47 guardrail assertions on ubuntu).
+- `mcp-doctor` — CI **green** (build + 12-assertion MCP gauntlet on ubuntu).
+- `agentic-creator-os` — CI **red by design** — the inventory-truth gate exits non-zero
+  while 15 SKILL.md files lack frontmatter (149/164). Goes green when item #5 is fixed.
 
-```
-gh auth refresh -h github.com -s workflow
-```
+CI caught two real portability bugs the local (Windows) run missed: a formatter shim
+returning 127 on a toolchain-less runner, and a pnpm/npm lockfile mismatch. Both fixed.
 
-Then, per repo: `git add .github/workflows/harness.yml && git commit -m "ci: harness gate" && git push`
-(or ping me and I'll finish all of them once the scope is live).
+## 2. L5 observability — you do NOT need Docker. Recommendation:
 
-## 2. No container runtime → Langfuse (L5) could not be stood up
+The only thing that wanted containers was self-hosting Langfuse. Three honest options:
 
-Docker and Podman are both absent. Langfuse self-host (the planned observability layer) needs a
-container runtime, so **no production traces were captured** — the L5 success criterion is unmet,
-honestly. Frank prefers Podman (per global prefs). Action (your call):
+1. **Skip L5 for now (recommended).** Observability earns its keep at production traffic;
+   these tools aren't there yet. The harness value (L1–L4: proven repos + CI gates) needs no
+   containers. Don't install infra speculatively.
+2. **When you do want traces → Langfuse *Cloud* free tier** (50k events/mo). Zero containers:
+   sign up, drop 3 env vars (`LANGFUSE_HOST/PUBLIC_KEY/SECRET_KEY`), wire OpenInference/OTel
+   into the mcp-doctor + SIS MCP servers. ~30 min, no machine setup. **This is the cloud path
+   you asked about — it fully removes the Docker question.**
+3. **Sovereign self-host (later, optional)** — matches your global pref for Podman:
+   `winget install RedHat.Podman-Desktop` → `podman machine init && podman machine start`, then
+   Langfuse via compose. Only worth it once you have ≥2 concrete container needs (Langfuse +
+   e.g. local Postgres / containerized MCP servers). Not Docker Desktop (org licensing + heavier).
 
-```
-winget install RedHat.Podman-Desktop    # then: podman machine init && podman machine start
-```
+Note: CI already runs in the cloud (GitHub ubuntu runners) with no local containers — so for
+eval/gating purposes the machine never needed Docker at all.
 
-Once a runtime exists I can: bring up Langfuse via compose, wire OpenInference/OTel into
-mcp-doctor + SIS MCP servers, and capture a trace per server.
+## 3. ~~SIS build is red~~ ✅ RESOLVED 2026-06-04
 
-## 3. SIS build is red — 2-line fix on your active branch (I did not touch your WIP)
-
-`src/cli.ts:323` and `:325` — `execSync(...)` returns `string | Buffer`; `.trim()` fails the
-type check. Fix: pass `{ encoding: "utf8" }` to those `execSync` calls (or wrap `String(...)`).
-I left it alone because `docs/drift-fixes-2026-05-26` has 58 dirty files and looked mid-edit.
-This is the single highest-leverage fix in the ecosystem (flips the most mature repo to green).
+`src/cli.ts` source was already fixed (`String(...)` wrapping present). The real blocker was a
+missing `typescript` in `node_modules` (an install had wiped it). Ran `npm install` →
+**`npm run build` is now green (exit 0)**, MCP server boots 10 tools, `v01-mcp-tools.test.ts`
+37/37. SIS is now fully SELLABLE.
 
 ## 4. ACOS harness PR could not be opened cleanly
 
