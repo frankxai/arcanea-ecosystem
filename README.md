@@ -97,7 +97,30 @@ This repo is now a pure portfolio registry.
 - `scripts/clone-all.sh`
   - optional workspace bootstrap helper from registry metadata
 
-## Current status
+## Current status (God Mode — Superintelligence Mapper + Higgsfield Games enrichment, Jun 2026)
+
+**New top functionality (Jun 2026):** @arcanea/world-sdk (pure ESM, zero-dep) + evolution engine: speak world → genesis/scaffold (deterministic World Bible + visualDna + agents crew) → harness-structured agent creation (any harness reads manifest.agents, writes canon/characters/quests) → recordMemory (private .arcanea/memories, hash-proof) → distill → evolveCharacter (char transforms + public canonLevel-2 "earned by everyone" lore; hash moves on real lived change) → render (book targets, index, claim proof). The "Mapper" enriches further: memory/meaning → Higgsfield games + books + companions. GitHub-central sovereign (user repo or OAuth-managed under user acct); app/PWA/mobile = beautiful complementary visual state + consume + light edit (interchangeable with agents). Delete zero repos. Harnesses (grok-arcanea, codex-arcanea, antigravity-arcanea, claude-arcanea...) are the creation engine + per-ecosystem marketplace reach — invest. NFT-forge/onchain/platform/records kept for later IP/marketplace layer. Success-based riches (marketplace 10-20%, Label only on assisted commercialization, premium gen/hosting, onchain proofs). No data landlord: repo is source of truth; derived index/cache only.
+
+**L1 Brand & Visual Canon Assets (Grok-delivered, Jun 2026):** Top-notch cinematic and viral content engine for arcanea.ai (the front-door "gasp" experience). Includes:
+- `videos/arcanea-cinematic-hero/`: Hero cinematic brand film (60s+ cuts, MP4s produced, full HyperFrames source with Three/GSAP living elements, design.md, STORYBOARD.md, assets/plates/VO). Research-grounded mythic-cosmic style matching Arcanea visualDNA.
+- `videos/arcanea-viral-content/`: Complete L1 content suite — 1 full explainer (75s) + 5 viral shorts (hooks, character evolution, swarm, soundtrack, ownership), with design system, CONTENT-PLAN.md (scripts, beats, 2026 viral research), MASTER-README, REVIEW-PROCESS-IMPROVEMENTS, CONTENT-CALENDAR-SOCIAL-COPY (full hooks/captions/threads/A/B + repurposing), VO scripts, assets. All pieces follow HyperFrames excellence gates (lint/validate/inspect), deterministic, brand-consistent with hero. Other approaches: carousels, threads, long-form breakdowns, community challenges.
+These are the professional visual canon and marketing assets to make the Genesis flow undeniable — the "speak a world into existence" gasp, coherence demo, living evolution, ownership. Delivered via Grok harness (native + hyperframes) as part of L1 experience layer. Integrate into arcanea.ai site, app, onboarding, and creator surfaces. See videos/*/MASTER-README.md, design.md, and plans for usage, renders, and iteration. Excellence: Full review process applied; best from visual, strategy, and content agents synthesized. Healthy: Self-contained projects with checks; no overwrites to other work.
+
+See:
+- `schemas/world.arcanea.schema.json` + `example.json` (v1.1+ game/memory/meaning/community/mapper fields)
+- `docs/WORLD_REPO_STANDARD.md` §8 (detailed mapper, Higgsfield integration workflows, memory/meaning layers, multi-harness god-mode: Grok build (native + GH MCP) + Claude Code + Higgsfield MCP + Arcanea MCPs (arcanea-mcp + memory-mcp) + Arcanea skills (world-build etc.))
+- `scripts/world-to-higgsfield-game-mapper.mjs` (executable seed: parses world → rich Fable/Higgsfield prompt + asset plan + memory injection spec + community hooks. Run it in any world repo.)
+- `scripts/world-state.mjs` (🌍 Name | Nc Nb Nq Nm 🎬grok,claude ⎇repo [palette] — compact visual per-world state for ACOS statuslines, agent bars, dashboards. Powers "visual nice each person state of their world".)
+- `docs/ARCANEA_STRATEGY_2026.md` (updated leapfrog + superintelligence vision)
+
+**Stack for ultimate worlds + products around community:**
+- Grok (this harness): coherence, native image/video for initial canon seeds, GH ops.
+- Claude Code + Higgsfield MCP (https://mcp.higgsfield.ai/mcp): game writing + massive asset gen.
+- Arcanea MCPs + skills + memory system: persistent state, graph, meaning-preserving orchestration, 7 Pillars.
+- GitHub world repos: sovereign ownership, forks as instances, PRs as community evolution events that write back to memory/meaning.
+- Output: games, books, AI companions, experiences — all living and evolvable. Creators ship; ecosystem wins on success (marketplace, tools, Label).
+
+Existing foundations (memory, meaning, MCPs, skills, orchestration, world standard, GitHub central) are already extremely strong. This enriches them into the god-mode mapper.
 
 The active production shape is centered on:
 
@@ -108,6 +131,8 @@ The active production shape is centered on:
 - `oh-my-arcanea`
 - `claude-arcanea`
 - `codex-arcanea`
+- `gemini-arcanea`
+- `grok-arcanea` (Grok native image/video + world-repo agents)
 - `arcanea-infogenius`
 - `arcanea-onchain`
 

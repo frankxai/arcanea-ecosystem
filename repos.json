@@ -2,7 +2,7 @@
   "ecosystem": "Arcanea",
   "version": "2.0.0",
   "description": "Portfolio registry for Arcanea platform, orchestration, runtimes, and vertical products",
-  "updated": "2026-04-03",
+  "updated": "2026-06-12",
   "repositories": {
     "platform": [
       {
@@ -110,6 +110,16 @@
         "role": "runtime-harness"
       },
       {
+        "name": "grok-arcanea",
+        "path": "../grok-arcanea",
+        "mode": "external",
+        "url": "https://github.com/frankxai/grok-arcanea.git",
+        "description": "Grok (xAI) Arcanea harness — native Imagine image/video (v1.5+) for world canon (visualDna-anchored portraits/covers/scenes), structured world-repo builder via @arcanea/world-sdk + harness adapter, per-ecosystem creation engine + marketplace distribution; first-class for Grok users",
+        "branch": "main",
+        "priority": "critical",
+        "role": "runtime-harness"
+      },
+      {
         "name": "claude-code-oracle-skills",
         "path": "../claude-code-oracle-skills",
         "mode": "external",
@@ -194,6 +204,7 @@
       "claude-arcanea",
       "codex-arcanea",
       "gemini-arcanea",
+      "grok-arcanea",
       "arcanea-infogenius",
       "arcanea-onchain",
       "arcanea-claw"
