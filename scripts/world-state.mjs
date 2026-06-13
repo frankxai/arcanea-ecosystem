@@ -3,6 +3,9 @@
 // For ACOS statuslines, agent bars, dashboards, CI.
 // Usage: node world-state.mjs [world-dir] [--json]
 // Output: 🌍 Name | 3c 1b 0q 12m 🎬grok,claude ⎇user/repo [pal:#0a1,#1f6] sha...
+//
+// Starlight Intelligence / mapper aware (v1.1+): surfaces hasMemory/hasMeaning/hasGame/mapperVersion in --json.
+// Re-validation: after mapper/standard/schema changes, run on example + this script. Excellence gates via harness (repo-mastery + verification/santa).
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
@@ -107,7 +110,10 @@ async function main() {
         counts: { characters: nc, books: nb, quests: nq, media: nm },
         agents: (manifest.agents || []).map(a => ({id:a.id, harness:a.harness})),
         palette: manifest.visualDna?.palette || [],
-        remote, hash, premise: (manifest.premise || "").slice(0,120)
+        remote, hash, premise: (manifest.premise || "").slice(0,120),
+        schemaVersion: manifest.schemaVersion,
+        hasMemory: !!manifest.memory, hasMeaning: !!manifest.meaning, hasGame: !!manifest.game,
+        mapperVersion: manifest.mapper?.version || null
       }, null, 2));
     } else {
       console.log(line);

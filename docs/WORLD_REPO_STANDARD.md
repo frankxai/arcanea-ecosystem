@@ -1,4 +1,6 @@
-# The Arcanea World Repo Standard (v1.0.0)
+# The Arcanea World Repo Standard (v1.1+ mapper extensions; base v1.0.0 contract)
+
+> v1.1+ adds optional game/memory/meaning/community/mapper sections as the superintelligence "mapper" substrate (Starlight Intelligence). Base fields and rules remain fully backward-compatible with v1.0 worlds. See §8 for the full Mapper vision.
 
 > The keystone convention. A "world" is a folder/repo that conforms to this standard.
 > Every layer depends on it: coding-agent harnesses **write** it, the Arcanea index **parses** it,
@@ -32,10 +34,11 @@ my-world/
   media/                    # binary canon: images, audio theme, video (Git LFS or external URLs)
   agents/                   # the orchestration manifest — which agents build this world
     <agent-id>.md
+  game/                     # mapper outputs (Higgsfield/Fable game seeds, assets, playable links — see §8)
   licenses/                 # license + royalty policy (pointed to by the manifest)
     LICENSE.md
     royalty.json
-  .arcanea/                 # tooling: lockfiles, cache hints, private-marked notes (gitignored if private)
+  .arcanea/                 # tooling: lockfiles, cache hints, private evolution/memories + writebacks (gitignored if private)
 ```
 
 Rules:

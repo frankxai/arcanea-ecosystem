@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    :root { --bg:#05070f; --fg:#f0e9d9; --gold:#c5a26f; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html,body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); font-family:"Inter",sans-serif; }
+    .grain { position:absolute; inset:0; z-index:50; pointer-events:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22256%22 height=%22256%22 filter=%22url(%23n)%22 opacity=%220.035%22/></svg>'); background-size:256px; mix-blend-mode:screen; }
+    .center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:10; width:88%; }
+    .title { font-family:"Playfair Display",serif; font-size:56px; color:var(--fg); line-height:0.92; font-weight:700; }
+    .sub { font-size:21px; color:#a8a39a; margin-top:14px; }
+    .proof { position:absolute; top:32%; left:50%; transform:translate(-50%,-50%); font-size:14px; color:var(--gold); letter-spacing:2px; border:1px solid var(--gold); padding:4px 14px; opacity:0; }
+    .cta { position:absolute; bottom:9%; left:0; right:0; text-align:center; font-size:17px; color:var(--gold); letter-spacing:3px; z-index:20; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="ownership" data-start="0" data-duration="25" data-width="1080" data-height="1920">
+    <div class="grain"></div>
+    <div class="center">
+      <div style="font-size:15px; color:#a8a39a; letter-spacing:3px; margin-bottom:4px;">SOVEREIGNTY</div>
+      <div class="title">I built it.<br>I own it.</div>
+      <div class="sub">Export to my repo. Claim the proof.<br>Free. Portable. Mine forever.</div>
+    </div>
+    <div class="proof" id="proof">WORLD PROOF CLAIMED • ONCHAIN</div>
+    <div class="cta">Most AI worlds disappear.<br>This one lives in your GitHub. • arcanea.ai</div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = { "ownership": tl };
+
+    function build(){
+      tl.from(".title", {y:16, opacity:0, duration:1.2, ease:"power3.out"}, 0.7);
+      tl.from(".sub", {y:10, opacity:0, duration:0.9, ease:"power2.out"}, 1.6);
+      tl.to("#proof", {opacity:0.9, duration:0.8, ease:"power2.out"}, 8);
+      tl.to("#proof", {opacity:0.4, duration:6, ease:"sine.inOut"}, 9);
+    }
+    function init(){ build(); }
+    if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+  </script>
+</body>
+</html>

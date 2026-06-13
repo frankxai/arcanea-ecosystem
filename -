@@ -1,0 +1,85 @@
+# The Drowned Archive — Higgsfield Game Seed + Mapper Output (Arcanea Mapper v1.1)
+
+Generated: 2026-06-12T10:55:52.625Z
+World file: schemas/world.arcanea.example.json
+
+## Seed Prompt (paste into Claude + Higgsfield MCP Games / Fable 5)
+
+ULTIMATE LIVING WORLD SEED FOR HIGGSFIELD GAMES + CLAUDE FABLE 5 (Arcanea v1.1 Mapper)
+
+World: The Drowned Archive
+Premise: Centuries after the Flood swallowed Vael, its survivors trade in remembered moments — the only thing the water could not dissolve.
+Immutable Laws: A memory spent is a memory lost — forever. | The deeper you dive, the older the memories you can reach. | No one may sell a memory that is not their own.
+
+Visual DNA (use for ALL asset consistency via refs/character training):
+Palette: #0a1a2f, #1f6f8b, #7ce0d3, #e8c87a
+Style: bioluminescent ruin, refracted light, weathered brass and coral
+Motifs: drowned libraries, memory-coins, lantern-fish, tide-glyphs
+
+SEVEN PILLARS (world-build skill framework — map every mechanic, quest, NPC behavior, and visual to these for depth):
+Geography (drowned ruins shape isolation) • History & Time (memory as living history) • Belief & Meaning (a memory spent is a memory lost — the spiritual cost of survival)
+
+MEANING LAYER (Pillar 7 + emotional architecture — the "why". Preserve in story, dialogue, choices, NPC souls):
+Core Beliefs: A memory spent is a memory lost — forever. • The deeper you dive, the older (and more dangerous) the memories.
+Emotional Anchors (preserve as memory-extracts / Depth Scrolls for NPCs and player impact): desperation of first loss • awe of ancient recovered memory • guilt of trading someone else's moment
+Tensions (primary generators of story, quests, branching, and meaningful play): personal survival vs collective memory preservation • truth of the past vs the mercy of forgetting
+
+MEMORY LAYER (persistent, evolvable, cross-product):
+Vaults: lore, character-states, events, community-contributions
+Recent Evolution (inject into game saves/NPC long-term memory; player actions should append new entries): the-lantern-diver: spent three personal memories to save a stranger; now haunted by fragments of the stranger's past
+Instruction: Character evolution_state and emotional anchors MUST drive NPC behavior, quest availability, and "memory cost" mechanics across sessions. Games must support writing player choices back as evolution events.
+
+GAME MAPPING (output to game/ per world.arcanea standard):
+Genre target: rpg
+Core Mechanics (derive directly from laws + meaning tensions + power dynamics + quests): memory-as-currency with permanent loss • gate/depth progression for abilities • emotional anchors affect NPC reactions and quest branches
+Memory Injection: ENABLED — persistent NPC states + emotional anchors across player sessions and world instances (forks).
+Procedural Map Hints: Use geography/history from pillars + visual motifs for level/world generation (drowned libraries, tide rhythms, memory-coins as collectibles that have emotional weight).
+
+HIGGSFIELD ASSET PLAN (generate via Higgsfield MCP tools or Grok native Imagine/image-to-video for initial canon seeds; then scale in game flow):
+- Character refs (train once for consistency): lantern-fish-diver, memory-merchant
+- Environment / location prompts (cinematic stills + image-to-video for atmosphere): sunken library with glowing memory-coins ; coral-reef marketplace at high tide
+- Cinematic scenes (short video clips for key beats, trailers, memory flashbacks): first memory spent in desperation ; tide-glyph ritual under bioluminescent light
+Use reference images from initial Grok/Gemini seeds for character + style lock. Prioritize cinematic quality, motion that respects physics and emotional tone, native audio where available.
+
+COMMUNITY & PERSISTENCE:
+Forks/instances: https://github.com/collaborator/the-drowned-archive-fork
+Events that evolve the world: visitor-choice-06-11: chose to return a memory instead of spending it — updated canon for all instances
+Contribution rule: All game-derived or community content must map back through the meaning/memory layers and be proposed as PRs that update evolution + meaning.tensions.
+
+FULL STORY SEED (Fable 5: research the entire provided world canon, books, characters, and this mapper output. Write a complete, coherent, replayable game with beginning/middle/end + meaningful branches. Deploy as playable link.):
+[Insert full premise + key characters with current evolution states + 2-3 quests that embody the tensions + ending that can loop back with permanent memory consequences. Make it feel like the living world, not a generic game.]
+
+MAPPER METADATA (write back):
+harnessesUsed: ["grok (coherence + native visuals)", "claude-fable-5 + higgsfield-mcp (game code + scale assets)", "arcanea-mcp + memory-mcp (state/graph)", "arcanea-world-build-skill + seven-pillars (meaning)"]
+outputs: ["game", "memory-updated-manifest", "community-evolvable-instance"]
+lastRun: 2026-06-12T10:55:52.624Z
+
+After generation: Update this manifest's game.playableUrl, game.lastGenerated, memory.evolution (new entries from play), mapper, and commit to the repo. Community can fork the game instance or PR evolutions.
+
+
+## Quick Asset List for Direct Higgsfield Calls
+Characters: lantern-fish-diver
+- memory-merchant
+Environments: sunken library with glowing memory-coins
+- coral-reef marketplace at high tide
+Scenes (image-to-video): first memory spent in desperation
+- tide-glyph ritual under bioluminescent light
+
+## Memory Injection Spec
+- Pull current evolution and anchors into initial NPC long-term memory and "memory economy" systems.
+- Any player choice that would matter in the world lore must be able to append an evolution event.
+- Support save states / cloud sync that carries character evolution back to the world repo (or shared community instance).
+
+## Suggested Next Steps (agent or human)
+1. (Grok or local) Generate initial consistent visual seeds using the visualDna + character refs (this harness has native image/video tools).
+2. Paste the full seed above into Claude (with Higgsfield MCP connected at https://mcp.higgsfield.ai/mcp). Authorize and say "build and deploy the game".
+3. On success, update the world manifest (game.playableUrl, mapper, any new evolution from test play).
+4. Commit to GH. Share the playable link + world repo. Invite community forks/PRs that evolve meaning/memory.
+5. Re-run mapper after significant community or play events for v2.
+
+## Files to create/update in the world repo
+- game/seed.md (this content or the prompt)
+- game/assets/ (downloaded or referenced from Higgsfield)
+- Update world.arcanea.json with the mapper/game/memory/meaning fields from this run.
+
+This mapper makes Arcanea the memory + meaning + community substrate that turns Higgsfield's powerful game creation into *ultimate, persistent, ownable living worlds and products*.

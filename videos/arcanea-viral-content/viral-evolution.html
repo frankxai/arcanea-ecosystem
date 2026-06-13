@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    :root { --bg:#05070f; --fg:#f0e9d9; --gold:#c5a26f; --teal:#2a5c5c; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html,body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); font-family:"Inter",sans-serif; }
+    .grain { position:absolute; inset:0; z-index:50; pointer-events:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22256%22 height=%22256%22 filter=%22url(%23n)%22 opacity=%220.035%22/></svg>'); background-size:256px; mix-blend-mode:screen; }
+    .scene { position:absolute; inset:0; }
+    .center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:10; width:88%; }
+    .title { font-family:"Playfair Display",serif; font-size:68px; color:var(--fg); line-height:0.94; font-weight:700; }
+    .sub { font-size:26px; color:#a8a39a; margin-top:18px; }
+    .glow { position:absolute; top:38%; left:50%; transform:translate(-50%,-50%); width:620px; height:620px; background:radial-gradient(circle, rgba(197,162,111,0.12) 0%, transparent 70%); z-index:1; border-radius:50%; }
+    .cta { position:absolute; bottom:12%; left:0; right:0; text-align:center; font-size:20px; color:var(--gold); letter-spacing:3px; z-index:20; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="evolution" data-start="0" data-duration="28" data-width="1080" data-height="1920">
+    <div class="grain"></div>
+    <div class="glow" id="memglow"></div>
+
+    <div class="scene clip" data-start="0" data-duration="28" data-track-index="1" style="opacity:1;">
+      <div class="center">
+        <div style="font-size:18px; color:#a8a39a; letter-spacing:4px; margin-bottom:8px;">CHARACTER EVOLUTION</div>
+        <div class="title" id="t1">I created her.</div>
+        <div class="sub" id="s1">Simple. Static. Beautiful.</div>
+      </div>
+    </div>
+
+    <div class="scene clip" data-start="9" data-duration="19" data-track-index="1">
+      <div class="center">
+        <div class="title" id="t2">I visited.<br>She remembered.</div>
+        <div class="sub" id="s2">New memories. New lore.<br>She changed because of me.</div>
+      </div>
+    </div>
+
+    <div class="cta">Living characters. Real memories.<br>arcanea.ai</div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = { "evolution": tl };
+
+    function build(){
+      tl.from("#t1", {y:24, opacity:0, duration:1.1, ease:"power3.out"}, 0.8);
+      tl.from("#s1", {y:16, opacity:0, duration:0.9, ease:"power2.out"}, 1.6);
+      tl.to("#memglow", {scale:1.25, opacity:0.7, duration:2.8, ease:"sine.inOut"}, 3.2);
+
+      tl.to("#t1", {opacity:0, duration:0.6, ease:"power2.in"}, 8.4);
+      tl.to("#s1", {opacity:0, duration:0.5, ease:"power2.in"}, 8.6);
+      tl.from("#t2", {y:20, opacity:0, duration:1.0, ease:"power3.out"}, 9.2);
+      tl.from("#s2", {y:14, opacity:0, duration:0.8, ease:"power2.out"}, 10.0);
+      tl.to("#memglow", {scale:1.6, opacity:0.4, duration:7, ease:"sine.inOut"}, 9.5);
+    }
+    function init(){ build(); document.getElementById("root").style.opacity=1; }
+    if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+  </script>
+</body>
+</html>

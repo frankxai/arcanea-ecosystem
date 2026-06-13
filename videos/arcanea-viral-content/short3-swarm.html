@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root { --bg:#05070f; --fg:#f0e9d9; --gold:#c5a26f; --teal:#2a5c5c; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html,body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); font-family:"Inter",sans-serif; }
+    .grain { position:absolute; inset:0; z-index:50; pointer-events:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/></filter><rect width=%22256%22 height=%22256%22 filter=%22url(%23n)%22 opacity=%220.035%22/></svg>'); background-size:256px; mix-blend-mode:screen; }
+    .center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:10; width:90%; }
+    .title { font-family:"Playfair Display",serif; font-size:58px; color:var(--fg); line-height:0.92; font-weight:700; }
+    .sub { font-size:22px; color:#a8a39a; margin-top:14px; }
+    .three { position:absolute; inset:0; z-index:1; opacity:0.8; mix-blend-mode:screen; }
+    .cta { position:absolute; bottom:10%; left:0; right:0; text-align:center; font-size:18px; color:var(--gold); letter-spacing:3px; z-index:20; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="swarm" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+    <div class="grain"></div>
+    <canvas id="swarm3" class="three" width="1080" height="1920"></canvas>
+    <div class="center">
+      <div style="font-size:16px; color:#a8a39a; letter-spacing:4px; margin-bottom:6px;">THE FORGE</div>
+      <div class="title">16 Minds.<br>One World.</div>
+      <div class="sub">Specialized intelligences in concert.<br>Coherence at the speed of thought.</div>
+    </div>
+    <div class="cta">arcanea.ai</div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = { "swarm": tl };
+
+    let sS, sC, sR, sG;
+    function initS(){
+      const c = document.getElementById("swarm3");
+      if(!c || !window.THREE) return;
+      sR = new THREE.WebGLRenderer({canvas:c, alpha:true});
+      sR.setSize(1080,1920);
+      sS = new THREE.Scene();
+      sC = new THREE.PerspectiveCamera(48,1080/1920,0.1,5000);
+      sC.position.z = 700;
+      sG = new THREE.Group();
+      sS.add(sG);
+      let seed=314159; function r(){seed=(seed*16807)%2147483647;return(seed-1)/2147483646;}
+      for(let i=0;i<16;i++){
+        const rad=140 + r()*160;
+        const m = new THREE.Mesh(new THREE.SphereGeometry(4 + r()*2,14,14), new THREE.MeshBasicMaterial({color: i%4===0 ? 0xc5a26f : 0x2a5c5c, transparent:true, opacity:0.85}));
+        const a = r()*Math.PI*2, b=(r()-0.5)*0.8;
+        m.userData = {rad, a, b, sp:0.28 + r()*0.12, ph:r()*6.28, type:i};
+        sG.add(m);
+      }
+    }
+    function updS(t){
+      if(!sG || !sR) return;
+      sG.children.forEach((m,i) => {
+        if(!m.userData.rad) return;
+        const u = m.userData, tt = t * u.sp + u.ph;
+        m.position.x = Math.cos(tt + u.a) * u.rad * (1 + Math.sin(tt*0.5)*0.04);
+        m.position.y = Math.sin(tt*0.65 + u.b) * u.rad * 0.42;
+        m.position.z = Math.sin(tt + u.a*1.1) * 70;
+        if (i % 3 === 0) m.scale.setScalar(1 + Math.sin(tt*2)*0.15);
+      });
+      sG.rotation.y = t * 0.035;
+      sR.render(sS, sC);
+    }
+
+    function build(){
+      tl.fromTo("#swarm3", {opacity:0}, {opacity:0.85, duration:1.5, ease:"power2.out"}, 0.5);
+      tl.to("#swarm3", {opacity:0.6, duration:12, ease:"sine.inOut"}, 2);
+      tl.eventCallback("onUpdate", () => { updS(tl.time()); });
+    }
+    function init(){ initS(); setTimeout(()=>updS(0.1),50); build(); }
+    if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+  </script>
+</body>
+</html>

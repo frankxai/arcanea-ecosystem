@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root { --bg:#05070f; --fg:#f0e9d9; --gold:#c5a26f; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html,body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); font-family:"Inter",sans-serif; }
+    .scene { position:absolute; inset:0; opacity:0; }
+    .hook { position:absolute; top:22%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:10; }
+    .big { font-family:"Playfair Display",serif; font-size:92px; color:var(--fg); line-height:0.92; font-weight:700; letter-spacing:-2px; }
+    .overlay { position:absolute; bottom:18%; left:0; right:0; text-align:center; font-size:32px; color:#a8a39a; z-index:10; padding:0 60px; }
+    .grain { position:absolute; inset:0; z-index:50; pointer-events:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.95%22/></filter><rect width=%22256%22 height=%22256%22 filter=%22url(%23n)%22 opacity=%220.04%22/></svg>'); background-size:256px; mix-blend-mode:screen; }
+    .three { position:absolute; inset:0; z-index:1; opacity:0.85; mix-blend-mode:screen; }
+    .cta { position:absolute; bottom:8%; left:0; right:0; text-align:center; font-size:22px; color:var(--gold); letter-spacing:4px; z-index:20; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="viral1" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+    <div class="grain"></div>
+    <canvas id="weave" class="three" width="1080" height="1920"></canvas>
+
+    <div id="s1" class="scene clip" data-start="0" data-duration="18" data-track-index="1" style="opacity:1;">
+      <div class="hook">
+        <div style="font-size:22px; color:#a8a39a; letter-spacing:3px; margin-bottom:12px;">ONE SENTENCE</div>
+        <div class="big">A world<br>explodes<br>into life.</div>
+      </div>
+      <div class="overlay">It has memory.<br>It has a voice.<br>You own it.</div>
+      <div class="cta">arcanea.ai</div>
+    </div>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = { "viral1": tl };
+
+    let wS, wC, wR, wP;
+    function initW(){
+      const c = document.getElementById("weave");
+      if(!c||!window.THREE) return;
+      wR = new THREE.WebGLRenderer({canvas:c, alpha:true});
+      wR.setSize(1080,1920);
+      wS = new THREE.Scene();
+      wC = new THREE.PerspectiveCamera(52,1080/1920,0.1,4000);
+      wC.position.z=820;
+      const g = new THREE.BufferGeometry();
+      const n=480;
+      const p = new Float32Array(n*3);
+      let s=1729; function r(){s=(s*16807)%2147483647;return(s-1)/2147483646;}
+      for(let i=0;i<n;i++){
+        const rad=320+r()*520, a=r()*Math.PI*2;
+        p[i*3]=Math.cos(a)*rad; p[i*3+1]=Math.sin(a)*rad*0.55 + (r()-0.5)*220; p[i*3+2]=(r()-0.5)*380;
+      }
+      g.setAttribute("position", new THREE.BufferAttribute(p,3));
+      wP = new THREE.Points(g, new THREE.PointsMaterial({size:3.2, color:0xc5a26f, transparent:true, opacity:0.9, depthWrite:false}));
+      wS.add(wP);
+    }
+    function updW(t){ if(wP&&wR){ wP.rotation.y=t*0.022; wR.render(wS,wC); } }
+
+    function build(){
+      tl.fromTo("#weave", {opacity:0}, {opacity:0.9, duration:1.8, ease:"power2.out"}, 0.4);
+      tl.from(".big", {scale:0.96, opacity:0, duration:1.2, ease:"expo.out"}, 0.9);
+      tl.to(".overlay", {opacity:1, duration:0.8, ease:"power2.out"}, 3.2);
+      tl.to("#weave", {opacity:0.5, duration:8, ease:"sine.inOut"}, 1.5);
+      tl.eventCallback("onUpdate", ()=>{ updW(tl.time()); });
+    }
+    function init(){ initW(); setTimeout(()=>updW(0.1),60); build(); document.getElementById("s1").style.opacity=1; }
+    if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+  </script>
+</body>
+</html>

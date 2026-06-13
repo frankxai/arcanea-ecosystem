@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en" data-composition-variables='[
+  {"id":"genesisSentence","type":"string","label":"Genesis Sentence","default":"a drowned city where memory is currency"},
+  {"id":"worldName","type":"string","label":"World Name","default":"Vel Aether"},
+  {"id":"character1","type":"string","label":"First Luminor","default":"Elyndor, the Threadkeeper"},
+  {"id":"character2","type":"string","label":"Second Luminor","default":"Sylvara, the Memory Warden"},
+  {"id":"tagline","type":"string","label":"Tagline","default":"Weave. Remember. Enter. Own."}
+]'>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --bg: #05070f;
+      --bg-alt: #0a0f1f;
+      --fg: #f0e9d9;
+      --fg-muted: #a8a39a;
+      --gold: #c5a26f;
+      --gold-bright: #e8d5a3;
+      --indigo: #3f2a6b;
+      --crimson: #6b2a2a;
+      --teal: #2a5c5c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1920px; height: 1080px; overflow: hidden; background: var(--bg);
+      font-family: "Inter", system-ui, sans-serif;
+    }
+    .scene {
+      position: absolute; inset: 0; width: 1920px; height: 1080px; opacity: 0;
+    }
+    .scene-content {
+      position: relative; width: 100%; height: 100%;
+      padding: 140px 160px; display: flex; flex-direction: column;
+      box-sizing: border-box; z-index: 2;
+    }
+    .cinematic-bg {
+      position: absolute; inset: 0; z-index: 1; background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 30% 25%, rgba(197,162,111,0.08) 0%, transparent 55%),
+        radial-gradient(circle at 70% 75%, rgba(63,42,107,0.06) 0%, transparent 60%);
+    }
+    .grain {
+      position: absolute; inset: 0; z-index: 50; pointer-events: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/></filter><rect width=%22256%22 height=%22256%22 filter=%22url(%23n)%22 opacity=%220.035%22/></svg>');
+      background-size: 256px 256px; mix-blend-mode: screen; opacity: 0.6;
+    }
+    .vignette {
+      position: absolute; inset: 0; z-index: 49; pointer-events: none;
+      background: radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.65) 92%);
+    }
+    .title {
+      font-family: "Playfair Display", "Georgia", serif;
+      font-size: 92px; line-height: 0.96; font-weight: 700; color: var(--fg);
+      letter-spacing: -1.5px; max-width: 1180px;
+    }
+    .subtitle {
+      font-size: 32px; color: var(--fg-muted); font-weight: 300; letter-spacing: 0.5px; margin-top: 18px;
+    }
+    .law {
+      font-family: "Playfair Display", serif; font-size: 38px; color: var(--fg); line-height: 1.25;
+      max-width: 820px; border-left: 3px solid var(--gold); padding-left: 28px; margin: 14px 0;
+    }
+    .meta {
+      font-family: "JetBrains Mono", monospace; font-size: 15px; color: var(--fg-muted);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .plate {
+      position: absolute; z-index: 2; border-radius: 2px;
+      box-shadow: 0 30px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(197,162,111,0.12) inset;
+      transform: perspective(1200px) rotateY(-7deg);
+    }
+    .portal {
+      position: absolute; left: 50%; top: 50%; width: 620px; height: 620px; margin: -310px 0 0 -310px;
+      border-radius: 50%; border: 2px solid var(--gold);
+      box-shadow: 0 0 80px var(--gold), inset 0 0 120px rgba(197,162,111,0.25);
+      z-index: 4;
+    }
+    .three-canvas {
+      position: absolute; inset: 0; z-index: 1; opacity: 0.95; mix-blend-mode: screen;
+    }
+    .caption {
+      position: absolute; bottom: 92px; left: 160px; right: 160px; z-index: 60;
+      font-size: 26px; color: var(--fg); font-weight: 300; letter-spacing: 0.2px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="60" data-width="1920" data-height="1080">
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <!-- BEAT 1: THE SPARK -->
+    <div id="beat1" class="scene clip" data-start="0" data-duration="7.5" data-track-index="1" style="opacity:1;">
+      <div class="cinematic-bg"></div>
+      <div class="scene-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="meta" style="margin-bottom:18px; opacity:0.6;">ARCANEA • GENESIS</div>
+        <div id="spark-sentence" class="title" style="font-size:86px; max-width:1280px;">
+          One sentence.<br>
+          A world begins.
+        </div>
+        <div class="subtitle" style="margin-top:32px; max-width:820px;">
+          From the void, golden threads answer.
+        </div>
+      </div>
+      <img id="spark-plate" class="plate" src="assets/spark.jpg" style="width:1280px; height:720px; left:320px; top:180px; opacity:0;" />
+      <canvas id="weave-canvas" class="three-canvas" width="1920" height="1080"></canvas>
+    </div>
+
+    <!-- BEAT 2: THE BIBLE -->
+    <div id="beat2" class="scene clip" data-start="7.5" data-duration="9.5" data-track-index="1">
+      <div class="cinematic-bg"></div>
+      <div class="scene-content" style="justify-content:flex-start; padding-top:110px;">
+        <div class="meta" style="color:var(--gold); margin-bottom:8px;">WORLD BIBLE</div>
+        <div class="title" style="font-size:78px; line-height:0.92; margin-bottom:28px;">
+          The laws that hold.<br>
+          The soul that every creation obeys.
+        </div>
+        <div style="margin-top:42px; display:flex; gap:72px; align-items:flex-start;">
+          <div style="flex:1;">
+            <div id="law1" class="law">Memory is the only currency that never devalues.</div>
+            <div id="law2" class="law">What you weave, you may one day walk inside.</div>
+            <div id="law3" class="law">The world remembers every visitor. So must you.</div>
+          </div>
+          <div style="width:420px; flex-shrink:0;">
+            <img id="luminor-plate" class="plate" src="assets/luminor.jpg" style="width:420px; height:520px; opacity:0;" />
+            <div class="meta" style="margin-top:14px; text-align:right;">VISUAL DNA • LIVING CANON</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEAT 3: THE FORGE / SWARM -->
+    <div id="beat3" class="scene clip" data-start="17.2" data-duration="13" data-track-index="1">
+      <div class="cinematic-bg"></div>
+      <div class="scene-content" style="justify-content:center;">
+        <div class="meta" style="color:var(--gold); margin-bottom:6px;">THE FORGE • 16 MINDS</div>
+        <div class="title" style="font-size:72px; max-width:1100px; text-align:center;">
+          Not tools.<br>
+          Specialized intelligences in concert.
+        </div>
+        <div style="margin-top:38px; text-align:center; color:var(--fg-muted); font-size:28px; max-width:860px;">
+          Lore. Visual canon. Sound. Memory. Code. All flowing as one living substrate.
+        </div>
+      </div>
+      <img id="swarm-plate" class="plate" src="assets/swarm.jpg" style="width:1120px; height:630px; left:400px; top:225px; opacity:0;" />
+      <canvas id="swarm-canvas" class="three-canvas" width="1920" height="1080" style="z-index:3;"></canvas>
+    </div>
+
+    <!-- BEAT 4: THE LIVING -->
+    <div id="beat4" class="scene clip" data-start="30.5" data-duration="12.5" data-track-index="1">
+      <div class="cinematic-bg"></div>
+      <div class="scene-content" style="justify-content:flex-end; padding-bottom:140px;">
+        <div style="max-width:980px;">
+          <div class="meta" style="color:var(--teal); margin-bottom:10px;">THE LIVING MULTIVERSE</div>
+          <div class="title" style="font-size:68px; line-height:0.94;">
+            Characters that remember.<br>
+            Worlds that change because you were there.
+          </div>
+        </div>
+      </div>
+      <img id="graph-plate" class="plate" src="assets/worldgraph.jpg" style="width:980px; height:550px; left:820px; top:210px; opacity:0;" />
+    </div>
+
+    <!-- BEAT 5: THE THRESHOLD -->
+    <div id="beat5" class="scene clip" data-start="43.2" data-duration="10.5" data-track-index="1">
+      <div class="cinematic-bg" style="background: linear-gradient(135deg, #05070f 0%, #0a0f1f 100%);"></div>
+      <div class="scene-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="meta" style="margin-bottom:12px; color:var(--gold);">THE THRESHOLD</div>
+        <div class="title" style="font-size:82px; max-width:980px;">
+          Speak a world into existence.<br>
+          Then walk inside it.
+        </div>
+      </div>
+      <div id="portal" class="portal" style="opacity:0;"></div>
+      <img id="threshold-plate" class="plate" src="assets/threshold.jpg" style="width:1180px; height:662px; left:370px; top:209px; opacity:0;" />
+    </div>
+
+    <!-- BEAT 6: SOVEREIGN + END -->
+    <div id="beat6" class="scene clip" data-start="54.2" data-duration="5.8" data-track-index="1">
+      <div class="cinematic-bg"></div>
+      <div class="scene-content" style="justify-content:center; align-items:center; text-align:center;">
+        <div class="title" style="font-size:64px; max-width:1020px;">
+          Your world.<br>
+          Your rules.<br>
+          Your IP.
+        </div>
+        <div style="margin-top:42px; font-size:29px; color:var(--fg-muted); letter-spacing:0.6px;">
+          Abundant worlds now. Sovereignty from day one.
+        </div>
+        <div id="end-cta" style="margin-top:68px; font-size:21px; letter-spacing:3.5px; color:var(--gold);">
+          ARCANEA • THE LIVING UNIVERSE ENGINE
+        </div>
+        <div style="margin-top:12px; font-size:17px; color:var(--fg-muted);" id="end-url">arcanea.ai</div>
+      </div>
+    </div>
+
+    <div id="captions" class="caption" style="opacity:0;"></div>
+
+    <audio id="vo" data-start="0.8" data-track-index="10" src="assets/narration.wav" data-volume="0.96" muted playsinline></audio>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["main"] = tl;
+
+    const vars = (window.__hyperframes && window.__hyperframes.getVariables) ? window.__hyperframes.getVariables() : {
+      genesisSentence: "a drowned city where memory is currency",
+      worldName: "Vel Aether",
+      character1: "Elyndor, the Threadkeeper",
+      character2: "Sylvara, the Memory Warden",
+      tagline: "Weave. Remember. Enter. Own."
+    };
+
+    function addAmbientLife() {
+      // Finite ambient for determinism (112s comp)
+      gsap.to(".vignette", { opacity: 0.78, duration: 7.5, ease: "sine.inOut", repeat: 14, yoyo: true });
+    }
+
+    let weaveScene, weaveCam, weaveRenderer, weavePoints, weaveLines;
+    function initWeave() {
+      const canvas = document.getElementById("weave-canvas");
+      if (!canvas || !window.THREE) return;
+      weaveRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      weaveRenderer.setSize(1920, 1080);
+      weaveScene = new THREE.Scene();
+      weaveCam = new THREE.PerspectiveCamera(52, 1920/1080, 0.1, 4000);
+      weaveCam.position.set(0, 0, 920);
+
+      const geo = new THREE.BufferGeometry();
+      const count = 820;
+      const pos = new Float32Array(count * 3);
+      const col = new Float32Array(count * 3);
+      let s = 1729;
+      function rnd() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }
+      for (let i = 0; i < count; i++) {
+        const r = 420 + rnd() * 680;
+        const a = rnd() * Math.PI * 2;
+        const b = (rnd() - 0.5) * 1.6;
+        pos[i*3] = Math.cos(a) * r * (1 + b*0.1);
+        pos[i*3+1] = Math.sin(a) * r * 0.55 + b * 180;
+        pos[i*3+2] = (rnd()-0.5) * 520;
+        const g = 0.76 + rnd()*0.22;
+        col[i*3] = g * 0.96; col[i*3+1] = g * 0.78; col[i*3+2] = g * 0.62;
+      }
+      geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+      geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+      const mat = new THREE.PointsMaterial({ size: 2.8, vertexColors: true, transparent: true, opacity: 0.85, depthWrite: false });
+      weavePoints = new THREE.Points(geo, mat);
+      weaveScene.add(weavePoints);
+
+      const lgeo = new THREE.BufferGeometry();
+      const lpos = new Float32Array(42 * 3);
+      for (let i=0; i<42; i++) {
+        const t = i/41;
+        const x = (t-0.5) * 920 + Math.sin(t*5.2)*38;
+        lpos[i*3] = x; lpos[i*3+1] = Math.sin(t*3.8)*120 - 40; lpos[i*3+2] = Math.cos(t*2.1)*180 - 90;
+      }
+      lgeo.setAttribute("position", new THREE.BufferAttribute(lpos, 3));
+      const lmat = new THREE.LineBasicMaterial({ color: 0xc5a26f, transparent: true, opacity: 0.35 });
+      weaveLines = new THREE.Line(lgeo, lmat);
+      weaveScene.add(weaveLines);
+    }
+    function updateWeave(t) {
+      if (!weavePoints || !weaveRenderer) return;
+      const rot = t * 0.012;
+      weavePoints.rotation.y = rot * 0.6;
+      weavePoints.rotation.x = Math.sin(t * 0.07) * 0.08;
+      if (weaveLines) weaveLines.rotation.y = rot * 0.35;
+      weaveRenderer.render(weaveScene, weaveCam);
+    }
+
+    let swarmScene, swarmCam, swarmRend, swarmGroup;
+    function initSwarm() {
+      const canvas = document.getElementById("swarm-canvas");
+      if (!canvas || !window.THREE) return;
+      swarmRend = new THREE.WebGLRenderer({ canvas, alpha: true });
+      swarmRend.setSize(1920, 1080);
+      swarmScene = new THREE.Scene();
+      swarmCam = new THREE.PerspectiveCamera(48, 1920/1080, 0.1, 5000);
+      swarmCam.position.set(0, 40, 780);
+      swarmGroup = new THREE.Group();
+      swarmScene.add(swarmGroup);
+
+      let s = 314159;
+      function rnd(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }
+      for (let i=0; i<19; i++) {
+        const rad = 180 + rnd()*210;
+        const sph = new THREE.Mesh(
+          new THREE.SphereGeometry(5.5 + rnd()*3.5, 18, 18),
+          new THREE.MeshBasicMaterial({ color: i%3===0 ? 0xc5a26f : (i%4===0 ? 0x2a5c5c : 0x8f7a9e), transparent:true, opacity:0.9 })
+        );
+        const a = rnd()*Math.PI*2, b = (rnd()-0.5)*1.1;
+        sph.userData = { rad, a, b, speed: 0.22 + rnd()*0.19, phase: rnd()*6.28 };
+        swarmGroup.add(sph);
+      }
+      const core = new THREE.Mesh(new THREE.SphereGeometry(28, 28, 28), new THREE.MeshBasicMaterial({ color: 0xe8d5a3, transparent:true, opacity:0.65 }));
+      swarmGroup.add(core);
+    }
+    function updateSwarm(t) {
+      if (!swarmGroup || !swarmRend) return;
+      swarmGroup.children.forEach((m) => {
+        if (!m.userData || !m.userData.rad) return;
+        const u = m.userData;
+        const tt = t * u.speed + u.phase;
+        m.position.x = Math.cos(tt + u.a) * u.rad * (1 + Math.sin(tt*0.7)*0.06);
+        m.position.y = Math.sin(tt*0.8 + u.b) * (u.rad*0.48) - 30;
+        m.position.z = Math.sin(tt + u.a*1.3) * 92;
+        m.scale.setScalar(1 + Math.sin(tt*1.6)*0.08);
+      });
+      swarmGroup.rotation.y = t * 0.035;
+      swarmRend.render(swarmScene, swarmCam);
+    }
+
+    function buildTimeline() {
+      const cap = document.getElementById("captions");
+
+      // BEAT 1 (0-7.5s)
+      tl.fromTo("#spark-plate", { opacity: 0, scale: 0.985 }, { opacity: 0.82, scale: 1, duration: 3.2, ease: "power2.out" }, 1.2);
+      tl.from("#spark-sentence", { y: 38, opacity: 0, duration: 1.1, ease: "expo.out" }, 1.6);
+      tl.from(".subtitle", { y: 22, opacity: 0, duration: 0.8, ease: "power3.out" }, 2.1);
+      tl.to("#spark-plate", { scale: 1.022, duration: 5.8, ease: "sine.inOut", overwrite: "auto" }, 1.2);
+
+      // BEAT 2 (7.5-17s)
+      tl.to("#beat1", { opacity: 0, duration: 0.8, ease: "power2.in" }, 7.0);
+      tl.fromTo("#beat2", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power2.out" }, 7.5);
+      tl.from("#law1", { x: -38, opacity: 0, duration: 0.8, ease: "power3.out" }, 8.2);
+      tl.from("#law2", { x: -32, opacity: 0, duration: 0.7, ease: "power3.out" }, 8.8);
+      tl.from("#law3", { x: -28, opacity: 0, duration: 0.7, ease: "power3.out" }, 9.3);
+      tl.fromTo("#luminor-plate", { opacity: 0, y: 26 }, { opacity: 0.96, y: 0, duration: 1.8, ease: "power2.out" }, 9.8);
+      tl.to("#luminor-plate", { scale: 1.015, duration: 5.5, ease: "sine.inOut" }, 9.8);
+
+      // BEAT 3 (17-30s)
+      tl.to("#beat2", { opacity: 0, duration: 0.7, ease: "power2.in" }, 17.0);
+      tl.fromTo("#beat3", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 17.2);
+      tl.fromTo("#swarm-plate", { opacity: 0, scale: 0.97 }, { opacity: 0.78, scale: 1, duration: 2.2, ease: "power2.out" }, 18.2);
+      tl.to("#swarm-plate", { scale: 1.018, duration: 9, ease: "sine.inOut", overwrite: "auto" }, 18.2);
+
+      // BEAT 4 (30-43s)
+      tl.to("#beat3", { opacity: 0, duration: 0.7, ease: "power2.in" }, 30.2);
+      tl.set("#beat3", { opacity: 0 }, 30.5);
+      tl.fromTo("#beat4", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power2.out" }, 30.5);
+      tl.fromTo("#graph-plate", { opacity: 0, x: 60 }, { opacity: 0.9, x: 0, duration: 2.0, ease: "power3.out" }, 31.5);
+      tl.to("#graph-plate", { scale: 1.012, duration: 9, ease: "sine.inOut" }, 31.5);
+
+      // BEAT 5 (43-54s)
+      tl.to("#beat4", { opacity: 0, duration: 0.7, ease: "power2.in" }, 43.0);
+      tl.set("#beat4", { opacity: 0 }, 43.2);
+      tl.fromTo("#beat5", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 43.2);
+      tl.fromTo("#portal", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.8, ease: "back.out(1.4)" }, 44);
+      tl.fromTo("#threshold-plate", { opacity: 0, scale: 0.96, y: 18 }, { opacity: 0.94, scale: 1, y: 0, duration: 2.4, ease: "power2.out" }, 44.5);
+      tl.to("#threshold-plate", { scale: 1.028, duration: 7, ease: "sine.inOut", overwrite: "auto" }, 44.5);
+      tl.to("#portal", { scale: 1.18, opacity: 0.6, duration: 5, ease: "power2.inOut" }, 47);
+
+      // BEAT 6 (54-60s)
+      tl.to("#beat5", { opacity: 0, duration: 0.7, ease: "power2.in" }, 53.8);
+      tl.set("#beat5", { opacity: 0 }, 54.2);
+      tl.fromTo("#beat6", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 54.2);
+      tl.from("#end-cta", { y: 18, opacity: 0, duration: 1.0, ease: "power3.out" }, 55.5);
+      tl.from("#end-url", { y: 12, opacity: 0, duration: 0.8, ease: "power2.out" }, 56);
+      tl.to("#end-cta", { color: "#e8d5a3", duration: 3, ease: "sine.inOut", repeat: 1, yoyo: true }, 56.5);
+
+      // Captions (scaled for 60s cut, VO ~37s covers the emotional core)
+      const captions = [
+        { t: 2.0, text: "One sentence. A world begins." },
+        { t: 9.0, text: "The World Bible ignites." },
+        { t: 19.0, text: "Sixteen minds. One living substrate." },
+        { t: 33.0, text: "Characters that remember. Worlds that change." },
+        { t: 46.0, text: "Speak a world into existence. Then walk inside it." },
+        { t: 55.5, text: "Your world. Your rules. Your IP." }
+      ];
+      captions.forEach((c) => {
+        tl.to(cap, { opacity: 0, duration: 0.2, ease: "power2.in", overwrite: "auto", onComplete: () => { cap.textContent = c.text; } }, c.t - 0.1);
+        tl.to(cap, { opacity: 0.96, duration: 0.45, ease: "power2.out", overwrite: "auto" }, c.t);
+        tl.to(cap, { opacity: 0, duration: 0.35, ease: "power2.in", overwrite: "auto" }, c.t + 3.8);
+      });
+    }
+
+    // Drive Three.js from the main timeline's onUpdate (avoids empty-tween anti-pattern and ensures custom layers participate in player ready/duration)
+    function attachThreeDriver() {
+      tl.eventCallback("onUpdate", () => {
+        const t = tl.time();
+        updateWeave(t);
+        updateSwarm(t);
+      });
+    }
+
+    function init() {
+      addAmbientLife();
+      initWeave();
+      initSwarm();
+      setTimeout(() => { updateWeave(0.1); updateSwarm(0.1); }, 60);
+      buildTimeline();
+      attachThreeDriver();
+      const b1 = document.getElementById("beat1");
+      if (b1) b1.style.opacity = "1";
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>

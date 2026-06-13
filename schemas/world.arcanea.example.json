@@ -1,0 +1,178 @@
+{
+  "$schema": "https://arcanea.ai/schemas/world.arcanea.schema.json",
+  "schemaVersion": "1.0.0",
+  "id": "wld_01JABCDEF0GHJKMNPQRSTVWXYZ",
+  "slug": "the-drowned-archive",
+  "name": "The Drowned Archive",
+  "tagline": "A sunken city where memory is the only currency.",
+  "genesisPrompt": "a drowned city where memory is currency",
+  "premise": "Centuries after the Flood swallowed Vael, its survivors trade in remembered moments — the only thing the water could not dissolve.",
+  "laws": [
+    "A memory spent is a memory lost — forever.",
+    "The deeper you dive, the older the memories you can reach.",
+    "No one may sell a memory that is not their own."
+  ],
+  "mood": "cosmic",
+  "visualDna": {
+    "palette": [
+      "#0a1a2f",
+      "#1f6f8b",
+      "#7ce0d3",
+      "#e8c87a"
+    ],
+    "style": "bioluminescent ruin, refracted light, weathered brass and coral",
+    "motifs": [
+      "drowned libraries",
+      "memory-coins",
+      "lantern-fish",
+      "tide-glyphs"
+    ]
+  },
+  "theme": {
+    "audio": "media/theme.mp3",
+    "prompt": "submerged ambient, distant choral, slow tidal pulse"
+  },
+  "cover": "media/cover.png",
+  "creator": {
+    "handle": "frankx"
+  },
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "pointer": "licenses/LICENSE.md",
+    "commercial": true,
+    "remix": "allow-attribution"
+  },
+  "royalty": {
+    "policy": "licenses/royalty.json",
+    "splits": [
+      {
+        "to": "creator",
+        "bps": 9000
+      },
+      {
+        "to": "arcanea",
+        "bps": 1000
+      }
+    ]
+  },
+  "content": {
+    "canon": "canon/",
+    "characters": "characters/",
+    "locations": "locations/",
+    "quests": "quests/",
+    "books": "books/",
+    "media": "media/",
+    "agents": "agents/"
+  },
+  "agents": [
+    {
+      "id": "lore-keeper",
+      "harness": "claude",
+      "role": "Maintain canon consistency and deepen lore.",
+      "skill": "world-architect"
+    },
+    {
+      "id": "cartographer",
+      "harness": "gemini",
+      "role": "Generate locations and the world map."
+    },
+    {
+      "id": "visual-canon",
+      "harness": "grok",
+      "role": "Generate coherent key visuals, character portraits, and short cinematic scenes using latest Grok Imagine image + image-to-video (v1.5+). Anchor strictly to visualDna.",
+      "skill": "grok-imagine-world-canon"
+    },
+    {
+      "id": "composer",
+      "harness": "any",
+      "role": "Produce the world's soundtrack.",
+      "skill": "suno-prompt-architect"
+    }
+  ],
+  "index": {
+    "embeddingModel": "gemini-text-embedding-004",
+    "dim": 768
+  },
+  "provenance": [],
+  "visibility": "public",
+  "hosting": "repo",
+  "snapshot": {},
+  "game": {
+    "seedPrompt": "\nULTIMATE LIVING WORLD SEED FOR HIGGSFIELD GAMES + CLAUDE FABLE 5 (Arcanea v1.1 Mapper)\n\nWorld: The Drowned Archive\nPremise: Centuries after the Flood swallowed Vael, its survivors trade in remembered moments — the only thing the water could not dissolve.\nImmutable Laws: A memory spent is a memory lost — forever. | The deeper you dive, the older the memories you can reach. | No one may sell a memory that is not their own.\n\nVisual DNA (use for ALL asset consistency via refs/character training):\nPalette: #0a1a2f, #1f6f8b, #7ce0d3, #e8c87a\nStyle: bioluminescent ruin, refracted light, weathered brass and coral\nMotifs: drowned libraries, memory-coins, lantern-fish, tide-glyphs\n\nSEVEN PILLARS (world-build skill framework — map every mechanic, quest, NPC behavior, and visual to these for depth):\n... (full in game/seed.md)",
+    "genre": "rpg",
+    "mechanics": [
+      "memory-as-currency with permanent loss",
+      "gate/depth progression for abilities",
+      "emotional anchors affect NPC reactions and quest branches"
+    ],
+    "memoryInjection": true,
+    "lastGenerated": "2026-06-12T11:12:06.429Z"
+  },
+  "memory": {
+    "vaults": [
+      "lore",
+      "character-states",
+      "events",
+      "community-contributions"
+    ],
+    "embeddingsModel": "starlight-embedding-v1",
+    "evolution": [
+      {
+        "character_id": "the-lantern-diver",
+        "delta": "spent three personal memories to save a stranger; now haunted by fragments of the stranger's past",
+        "timestamp": "2026-06-11",
+        "meaning_impact": "deepened empathy but introduced identity bleed"
+      }
+    ]
+  },
+  "meaning": {
+    "pillars": [
+      "Geography (drowned ruins shape isolation)",
+      "History & Time (memory as living history)",
+      "Belief & Meaning (a memory spent is a memory lost — the spiritual cost of survival)"
+    ],
+    "coreBeliefs": [
+      "A memory spent is a memory lost — forever.",
+      "The deeper you dive, the older (and more dangerous) the memories."
+    ],
+    "emotionalAnchors": [
+      "desperation of first loss",
+      "awe of ancient recovered memory",
+      "guilt of trading someone else's moment"
+    ],
+    "tensions": [
+      "personal survival vs collective memory preservation",
+      "truth of the past vs the mercy of forgetting"
+    ]
+  },
+  "community": {
+    "contributors": [
+      {
+        "handle": "frankx",
+        "role": "genesis-creator",
+        "reputation": 95
+      }
+    ],
+    "forks": [
+      "https://github.com/collaborator/the-drowned-archive-fork"
+    ],
+    "contributionPolicy": "licenses/COMMUNITY.md (meaning-preserving edits only; all changes must append to evolution log and respect the 3 Laws)",
+    "events": [
+      "visitor-choice-06-11: chose to return a memory instead of spending it — updated canon for all instances"
+    ]
+  },
+  "mapper": {
+    "version": "1.1.0",
+    "lastRun": "2026-06-12T11:12:06.429Z",
+    "harnessesUsed": [
+      "grok",
+      "claude-fable-5",
+      "higgsfield-mcp",
+      "arcanea-mcp",
+      "world-build-skill"
+    ],
+    "outputs": [
+      "game"
+    ]
+  }
+}
