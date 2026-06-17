@@ -18,8 +18,11 @@ These are the assets required for the ecosystem portfolio showcase, video reels,
 |---|---|---|---|---|
 | **Ecosystem Portfolio Cover** | Cosmic threshold doorway emitting warm gold light and particles | `16:9` | 4K | `soul_cinematic` |
 | **Cinematic Hero Video Still**| Epic wide shot of floating stone spires connected by gold threads | `2.39:1` | 4K | `cinematic_studio_2_5`|
-| **Platform Promo Reel Hook** | 4-second cinematic clip of cosmic graph nodes igniting | `9:16` | 1080×1920 | `veo3_1` / `kling3_0` |
+| **Platform Promo Reel Hook** | 4-second cinematic clip of cosmic graph nodes igniting | `9:16` | 1080×1920 | `seedance_2_0` / `kling3_0`; existing 16:9 proof available |
 | **AI Artist Spotify Canvas** | 8-second slow-motion lo-fi animation matching Suno track | `9:16` | 1080×1920 | `seedance_2_0` |
+
+Existing candidate asset:
+`C:\Users\frank\starlight\higgsfield\assets\arcanea\dashboard_hero_premium.mp4`
 
 ---
 
@@ -37,3 +40,5 @@ To generate the Spotify Canvas:
 4. Enhance the output video via `upscale_video` (Topaz 2160p).
 5. Run the video through the `virality_predictor` to check engagement potential.
 6. Log all `job_id` strings and costs in [ledger.jsonl](file:///C:/Users/frank/starlight/higgsfield/ledger.jsonl).
+
+For the next pass, first storyboard a 9:16 cut from the existing Arcanea premium video before generating a new source clip.
