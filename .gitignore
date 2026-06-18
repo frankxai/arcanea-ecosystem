@@ -8,3 +8,16 @@ gemini-arcanea/
 claude-code-oracle-skills/
 infogenius/
 labs/
+
+# Starlight/ACOS temporary files
+.agent/
+*.log
+.system_generated/
+.next-backup/
+temp-*.json
+link-checker-report.json
+link-checker-report.txt
+
+# Starlight/ACOS temporary files
+.starlight/
+.gemini/
