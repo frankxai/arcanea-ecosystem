@@ -2,7 +2,15 @@
   "ecosystem": "Arcanea",
   "version": "2.0.0",
   "description": "Portfolio registry for Arcanea platform, orchestration, runtimes, and vertical products",
-  "updated": "2026-06-12",
+  "updated": "2026-06-16",
+  "promotion": {
+    "name": "Arcanea World Engine Promotion",
+    "repo": "arcanea-ai-app",
+    "branch": "codex/world-engine-promotion",
+    "sourceBranch": "agent/claude/world-integration",
+    "posture": "path-scoped transplant; no blind merge; Supabase derived index/cache only",
+    "verified": "Node 20 + pnpm 8.15.0 targeted checks: @arcanea/world-sdk 21/21, world-page renderer nonempty, @arcanea/web typecheck, webpack dev browser smoke for /worlds, /worlds/create, /worlds/the-drowned-archive with local dummy Supabase env"
+  },
   "repositories": {
     "platform": [
       {
