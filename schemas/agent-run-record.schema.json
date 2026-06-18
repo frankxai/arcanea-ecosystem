@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcanea.ai/schemas/agent-run-record.schema.json",
+  "title": "Arcanea Agent Run Record",
+  "description": "Canonical run ledger shape for Arcanea Code, Arcanea Orchestrator, app cockpit timelines, and future managed workers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "runId",
+    "createdAt",
+    "updatedAt",
+    "objective",
+    "repo",
+    "branch",
+    "worktree",
+    "runtime",
+    "lane",
+    "budget",
+    "mcp",
+    "approvals",
+    "status",
+    "verification",
+    "filesTouched",
+    "handoverPath",
+    "mergePosture"
+  ],
+  "properties": {
+    "runId": {
+      "type": "string",
+      "pattern": "^run_[A-Za-z0-9_-]+$"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch": {
+      "type": ["string", "null"]
+    },
+    "worktree": {
+      "type": ["string", "null"]
+    },
+    "runtime": {
+      "type": "string",
+      "enum": [
+        "claude-code",
+        "claude-agent-sdk",
+        "codex",
+        "opencode",
+        "gemini",
+        "grok",
+        "higgsfield",
+        "arcanea-studio",
+        "custom"
+      ]
+    },
+    "lane": {
+      "type": "string",
+      "enum": [
+        "interactive-subscription",
+        "byok-api",
+        "managed-arcanea",
+        "dry-run"
+      ]
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxMinutes", "maxToolCalls", "costEstimateConfidence"],
+      "properties": {
+        "maxUsd": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "maxMinutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxToolCalls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxModelCalls": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "maxSubagents": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "costEstimateUsd": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "costEstimateConfidence": {
+          "type": "string",
+          "enum": ["exact", "estimated", "unknown"]
+        }
+      }
+    },
+    "mcp": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mcpConnectorState"
+      },
+      "default": []
+    },
+    "approvals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "filesystemWrites",
+        "destructiveShell",
+        "externalWrites",
+        "paidGeneration"
+      ],
+      "properties": {
+        "filesystemWrites": {
+          "$ref": "#/$defs/approvalMode"
+        },
+        "destructiveShell": {
+          "$ref": "#/$defs/approvalMode"
+        },
+        "externalWrites": {
+          "$ref": "#/$defs/approvalMode"
+        },
+        "paidGeneration": {
+          "$ref": "#/$defs/approvalMode"
+        },
+        "secretTransmission": {
+          "$ref": "#/$defs/approvalMode"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "running",
+        "needs-approval",
+        "failed",
+        "completed",
+        "aborted"
+      ]
+    },
+    "verification": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/verificationEvidence"
+      },
+      "default": []
+    },
+    "filesTouched": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "handoverPath": {
+      "type": ["string", "null"]
+    },
+    "mergePosture": {
+      "type": ["string", "null"],
+      "enum": [
+        "none",
+        "docs-only",
+        "path-scoped-transplant",
+        "ready-for-review",
+        "needs-merge-room",
+        "blocked",
+        null
+      ]
+    }
+  },
+  "$defs": {
+    "approvalMode": {
+      "type": "string",
+      "enum": ["allow", "allowed-in-worktree", "ask", "deny"]
+    },
+    "mcpConnectorState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "state", "risk"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "connected",
+            "missing-auth",
+            "expired",
+            "unavailable",
+            "disabled"
+          ]
+        },
+        "risk": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "read-only",
+              "write-capable",
+              "destructive",
+              "cost-bearing",
+              "secret-bearing",
+              "external-side-effect"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "lastSuccessfulCallAt": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "loginHint": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "verificationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "command", "status"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["test", "typecheck", "build", "lint", "browser", "manual", "git-guard"]
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["passed", "failed", "skipped", "blocked"]
+        },
+        "summary": {
+          "type": ["string", "null"]
+        },
+        "artifact": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

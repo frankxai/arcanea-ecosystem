@@ -90,6 +90,10 @@ This repo is now a pure portfolio registry.
   - portfolio inventory
 - `docs/ARCANEA_PORTFOLIO_ARCHITECTURE.md`
   - architecture and orchestration model
+- `docs/ARCANEA_AGENT_STACK_2026.md`
+  - Claude Agent SDK credit-pause implications and the Arcanea Code / OpenCode / Claude Code / Codex runtime strategy
+- `schemas/agent-run-record.schema.json`
+  - canonical run ledger schema for Arcanea Code, AO, app cockpit timelines, and future managed workers
 - `scripts/status-all.mjs`
   - status view across tracked repos
 - `scripts/sync-all.mjs`
