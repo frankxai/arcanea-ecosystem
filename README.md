@@ -1,5 +1,8 @@
 # Arcanea Ecosystem
 
+> **Part of the wider [FrankX ecosystem](https://github.com/frankxai/frankxai/blob/main/ECOSYSTEM.md).** Arcanea is the creative-platform domain on the shared spine: **SIS** (memory) → **Hermes** (orchestration) → **ACOS** (operation).
+
+
 This repository is the portfolio registry for Arcanea.
 
 It is not the product source of truth. The product source of truth is the
