@@ -1,0 +1,6 @@
+ASPH WIP
+Branch: codex/agent-stack-integration-pointers
+Objective: build what you suggested further and also consider this and plan for all You’re right to push back. **“Onchain later” is too weak.** Better doctrine:  > **Decentralization is core from day one. Full onchain product complexity is not.**  That distinction matters. Arcanea should feel sovereign immedia
+Touched: M README.md ?? .asph-wip/ ?? 30_DAY_EXECUTION_PLAN.md ?? ARCANEA_AGENTIC_SWARM_OPS_PLAYBOOK.md ?? ARCANEA_MODERN_ECOSYSTEM_AND_PARTNERS_STRATEGY.md ?? ARCANEA_PARTNER_MATRIX_AND_CONNECTORS.md ?? ARCANEA_PARTNER_OUTREACH_AND_INTEGRATION_30DAY_PLAN.md ?? ARCANEA_RESPONSIBLE_ADOPTION_AND_EMPOWERMENT.md ?? WORLD_CREATION_ENGINE_CIVILIZATIONAL_VISION.md ?? diagrams/
+Resume with: git reset HEAD~1 --mixed
+Full prompt + visual console in agentic-ops/lifecycle/asph-genius-recovery.html
