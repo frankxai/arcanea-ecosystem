@@ -1,235 +1,392 @@
 {
   "ecosystem": "Arcanea",
-  "version": "2.0.0",
-  "description": "Portfolio registry for Arcanea platform, orchestration, runtimes, and vertical products",
-  "updated": "2026-06-12",
+  "version": "3.0.0",
+  "description": "Live portfolio registry for Arcanea product, satellites, harnesses, and local estate paths (Starlight machine).",
+  "updated": "2026-08-09",
+  "constellationReport": "C:/Users/frank/starlight/queen/reports/arcanea-constellation-map-2026-08-09.md",
+  "estateRoot": "C:/Users/frank/starlight/repos",
+  "principles": {
+    "source_of_truth_product": "arcanea-ai-app",
+    "source_of_truth_canon": "arcanea-ai-app/.arcanea/lore/CANON_LOCKED.md",
+    "public_mirror": "arcanea",
+    "registry_repo": "arcanea-ecosystem",
+    "orchestration_runtime": "arcanea-flow (package + optional standalone)",
+    "execution_substrate": "arcanea-orchestrator",
+    "billing_data_and_graph": "supabase in arcanea-ai-app",
+    "never_product_base": [
+      "C:/Users/frank/universe",
+      "C:/Users/frank/arcanea-studio",
+      "C:/Users/frank/starlight/repos/arcanea-ai-app-production-worktree"
+    ],
+    "clean_product_lane": "C:/Users/frank/starlight/repos/arcanea-ai-app/.worktrees/consolidate",
+    "payment_strategy": "LemonSqueezy before BV if needed, Stripe later as primary long-term rail"
+  },
+  "naming": {
+    "note": "Monorepo package.json name is 'arcanea'; folder and private GitHub product are arcanea-ai-app; public GitHub mirror is frankxai/arcanea.",
+    "private_product": "frankxai/arcanea-ai-app",
+    "public_mirror": "frankxai/arcanea",
+    "local_product_path": "C:/Users/frank/starlight/repos/arcanea-ai-app"
+  },
   "repositories": {
     "platform": [
       {
-        "name": "arcanea",
-        "path": "..",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea.git",
-        "description": "Main Arcanea platform and control plane",
-        "branch": "integration/agent-control-plane-unification",
+        "name": "arcanea-ai-app",
+        "path": "C:/Users/frank/starlight/repos/arcanea-ai-app",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-ai-app.git",
+        "description": "Canonical product monorepo + locked canon (.arcanea/lore). BYOK creative intelligence workspace.",
+        "branch": "main",
         "priority": "critical",
-        "role": "control-plane"
+        "role": "product-ssot",
+        "tier": "T0",
+        "visibility": "private",
+        "recommendedWorktree": "C:/Users/frank/starlight/repos/arcanea-ai-app/.worktrees/consolidate"
+      },
+      {
+        "name": "arcanea",
+        "path": null,
+        "mode": "remote-only",
+        "url": "https://github.com/frankxai/arcanea.git",
+        "description": "Public mirror / open narrative of the platform \u2014 not the private monorepo workdir.",
+        "branch": "main",
+        "priority": "high",
+        "role": "public-mirror",
+        "tier": "T3",
+        "visibility": "public",
+        "localClone": false
+      },
+      {
+        "name": "arcanea-academy",
+        "path": "C:/Users/frank/starlight/repos/arcanea-academy",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-academy.git",
+        "description": "World Proof Lab / academy front door.",
+        "branch": "main",
+        "priority": "high",
+        "role": "product-surface",
+        "tier": "T1",
+        "visibility": "private"
+      },
+      {
+        "name": "arcanea-domain-portals",
+        "path": null,
+        "mode": "remote-only",
+        "url": "https://github.com/frankxai/arcanea-domain-portals.git",
+        "description": "Host-aware front doors for developer, commons, and lab domains.",
+        "branch": "main",
+        "priority": "medium",
+        "role": "product-surface",
+        "tier": "T3",
+        "visibility": "private",
+        "localClone": false
+      },
+      {
+        "name": "arcanea-platform",
+        "path": null,
+        "mode": "remote-only",
+        "url": "https://github.com/frankxai/arcanea-platform.git",
+        "description": "Legacy social creation platform (Supabase). Historical \u2014 verify before revive.",
+        "branch": "main",
+        "priority": "watch",
+        "role": "legacy-platform",
+        "tier": "T3",
+        "visibility": "private",
+        "localClone": false
       },
       {
         "name": "arcanea-mobile",
-        "path": "../arcanea-mobile",
-        "mode": "external",
+        "path": null,
+        "mode": "remote-only",
         "url": "https://github.com/frankxai/arcanea-mobile.git",
-        "description": "Mobile application surface",
+        "description": "Mobile application surface (Expo).",
         "branch": "main",
         "priority": "medium",
-        "role": "product-surface"
+        "role": "product-surface",
+        "tier": "T3",
+        "visibility": "public",
+        "localClone": false
+      }
+    ],
+    "media_and_studio": [
+      {
+        "name": "arcanea-studio",
+        "path": "C:/Users/frank/starlight/repos/arcanea-studio",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-studio.git",
+        "description": "Provider-agnostic generative media studio UI.",
+        "branch": "main",
+        "priority": "high",
+        "role": "studio",
+        "tier": "T1",
+        "visibility": "public",
+        "canonicalLocal": "C:/Users/frank/starlight/repos/arcanea-studio",
+        "archiveHomeDuplicate": "C:/Users/frank/starlight/scratch/archive/arcanea-studio-home-*"
+      },
+      {
+        "name": "arcanea-claw",
+        "path": "C:/Users/frank/starlight/repos/arcanea-claw",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-claw.git",
+        "description": "Creator media engine \u2014 scan, classify, score, publish.",
+        "branch": "main",
+        "priority": "high",
+        "role": "media-engine",
+        "tier": "T1",
+        "visibility": "public"
+      },
+      {
+        "name": "arcanea-mcp-generate",
+        "path": "C:/Users/frank/starlight/repos/arcanea-mcp",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-mcp-generate.git",
+        "description": "Standalone Generate MCP (@frankxai/arcanea-mcp) \u2014 image/video/lipsync routing. DISTINCT from monorepo worldbuilding MCP package.",
+        "branch": "main",
+        "priority": "high",
+        "role": "mcp-generate",
+        "tier": "T2",
+        "visibility": "private",
+        "pairNote": "Monorepo package packages/arcanea-mcp is @arcanea/mcp-server (worldbuilding tools).",
+        "github": "frankxai/arcanea-mcp-generate"
+      },
+      {
+        "name": "arcanea-mcp-worldbuilding",
+        "path": "C:/Users/frank/starlight/repos/arcanea-ai-app/packages/arcanea-mcp",
+        "mode": "nested-package",
+        "url": "https://github.com/frankxai/arcanea-ai-app.git",
+        "description": "Worldbuilding MCP package inside product monorepo (@arcanea/mcp-server).",
+        "priority": "high",
+        "role": "mcp-worldbuilding",
+        "tier": "T0-package"
+      },
+      {
+        "name": "arcanea-spellbound",
+        "path": "C:/Users/frank/starlight/repos/arcanea-spellbound",
+        "mode": "local",
+        "url": null,
+        "description": "Vertical micro-drama player + production OS. draft-veto-pending content.",
+        "branch": "main",
+        "priority": "next",
+        "role": "vertical-drama",
+        "tier": "T2",
+        "visibility": "local-private"
       }
     ],
     "orchestration": [
       {
-        "name": "arcanea-flow",
-        "path": "../arcanea-flow",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-flow.git",
-        "description": "Arcanea-native orchestration runtime",
+        "name": "arcanea-orchestrator",
+        "path": "C:/Users/frank/starlight/repos/arcanea-orchestrator",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-orchestrator.git",
+        "description": "Multi-agent execution substrate (Agent Orchestrator fork).",
         "branch": "main",
-        "priority": "critical",
-        "role": "orchestration"
+        "priority": "high",
+        "role": "execution-substrate",
+        "tier": "T1",
+        "visibility": "public"
       },
       {
-        "name": "arcanea-orchestrator",
-        "path": "../arcanea-orchestrator",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-orchestrator.git",
-        "description": "Multi-agent execution substrate based on Composio Agent Orchestrator",
+        "name": "arcanea-flow",
+        "path": null,
+        "mode": "remote-only+nested-package",
+        "url": "https://github.com/frankxai/arcanea-flow.git",
+        "nestedPackage": "C:/Users/frank/starlight/repos/arcanea-ai-app/packages/arcanea-flow",
+        "description": "Swarm/orchestration runtime \u2014 prefer monorepo package for product; standalone for OSS.",
         "branch": "main",
-        "priority": "critical",
-        "role": "execution-substrate"
+        "priority": "high",
+        "role": "orchestration",
+        "tier": "T3",
+        "localClone": false
       }
     ],
-    "runtimes": [
+    "skills_and_agents": [
       {
-        "name": "arcanea-code",
-        "path": "../arcanea-code",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-code.git",
-        "description": "Flagship Arcanea coding runtime based on OpenCode",
-        "branch": "dev",
-        "priority": "critical",
-        "role": "runtime"
-      },
-      {
-        "name": "oh-my-arcanea",
-        "path": "../oh-my-arcanea",
-        "mode": "external",
-        "url": "https://github.com/frankxai/oh-my-arcanea.git",
-        "description": "Operator workflow layer for Arcanea runtime usage",
-        "branch": "dev",
+        "name": "arcanea-agent-skills",
+        "path": "C:/Users/frank/starlight/repos/arcanea-agent-skills",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-agent-skills.git",
+        "description": "Executable Claude/Codex skill packs for worldbuilding and taste QA.",
+        "branch": "main",
         "priority": "high",
-        "role": "operator-layer"
+        "role": "skills",
+        "tier": "T1",
+        "visibility": "private"
       },
       {
-        "name": "arcanea-opencode",
-        "path": "../arcanea-opencode",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-opencode.git",
-        "description": "Legacy Arcanea OpenCode compatibility harness",
-        "branch": "dev",
-        "priority": "medium",
-        "role": "compatibility-layer"
+        "name": "arcanea-ecosystem",
+        "path": "C:/Users/frank/starlight/repos/arcanea-ecosystem",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-ecosystem.git",
+        "description": "This registry + strategy docs. Not application SSOT.",
+        "branch": "master",
+        "priority": "critical",
+        "role": "registry",
+        "tier": "T1",
+        "visibility": "public"
+      }
+    ],
+    "onchain_and_ip": [
+      {
+        "name": "arcanea-onchain",
+        "path": "C:/Users/frank/starlight/repos/arcanea-onchain",
+        "mode": "local+remote",
+        "url": "https://github.com/frankxai/arcanea-onchain.git",
+        "description": "On-chain / economic layer. Prefer GitHub main after 2026-08-09 rebind.",
+        "branch": "main",
+        "priority": "high",
+        "role": "vertical-onchain",
+        "tier": "T1",
+        "visibility": "public"
       },
+      {
+        "name": "arcanea-nft-forge",
+        "path": null,
+        "mode": "remote-only",
+        "url": "https://github.com/frankxai/arcanea-nft-forge.git",
+        "description": "NFT/PFP collection engine.",
+        "priority": "medium",
+        "role": "nft",
+        "tier": "T3",
+        "localClone": false
+      }
+    ],
+    "harnesses_remote": [
       {
         "name": "claude-arcanea",
-        "path": "../claude-arcanea",
-        "mode": "external",
         "url": "https://github.com/frankxai/claude-arcanea.git",
-        "description": "Claude Code Arcanea harness",
-        "branch": "master",
-        "priority": "high",
-        "role": "runtime-harness"
+        "mode": "remote-only",
+        "priority": "medium",
+        "localClone": false,
+        "nestedNote": "Also packages/claude-arcanea in monorepo"
       },
       {
         "name": "codex-arcanea",
-        "path": "../codex-arcanea",
-        "mode": "external",
         "url": "https://github.com/frankxai/codex-arcanea.git",
-        "description": "Codex Arcanea harness",
-        "branch": "master",
-        "priority": "high",
-        "role": "runtime-harness"
+        "mode": "remote-only",
+        "priority": "medium",
+        "localClone": false
       },
       {
         "name": "gemini-arcanea",
-        "path": "../gemini-arcanea",
-        "mode": "external",
         "url": "https://github.com/frankxai/gemini-arcanea.git",
-        "description": "Gemini Arcanea harness",
-        "branch": "master",
+        "mode": "remote-only",
         "priority": "medium",
-        "role": "runtime-harness"
+        "localClone": false
       },
       {
         "name": "grok-arcanea",
-        "path": "../grok-arcanea",
-        "mode": "external",
         "url": "https://github.com/frankxai/grok-arcanea.git",
-        "description": "Grok (xAI) Arcanea harness — native Imagine image/video (v1.5+) for world canon (visualDna-anchored portraits/covers/scenes), structured world-repo builder via @arcanea/world-sdk + harness adapter, per-ecosystem creation engine + marketplace distribution; first-class for Grok users",
-        "branch": "main",
-        "priority": "critical",
-        "role": "runtime-harness"
+        "mode": "remote-only",
+        "priority": "high",
+        "localClone": false
       },
       {
-        "name": "claude-code-oracle-skills",
-        "path": "../claude-code-oracle-skills",
-        "mode": "external",
-        "url": "https://github.com/frankxai/claude-code-oracle-skills.git",
-        "description": "Claude Code Oracle skill pack",
-        "branch": "main",
+        "name": "oh-my-arcanea",
+        "url": "https://github.com/frankxai/oh-my-arcanea.git",
+        "mode": "remote-only",
         "priority": "medium",
-        "role": "skills-layer"
+        "localClone": false
+      },
+      {
+        "name": "arcanea-agent",
+        "url": "https://github.com/frankxai/arcanea-agent.git",
+        "mode": "remote-only",
+        "priority": "medium",
+        "localClone": false
+      },
+      {
+        "name": "arcanea-agent-profile",
+        "url": "https://github.com/frankxai/arcanea-agent-profile.git",
+        "mode": "remote-only",
+        "priority": "medium",
+        "localClone": false
       }
     ],
-    "verticals": [
+    "oss_and_verticals_on_demand": [
+      {
+        "name": "arcanea-core",
+        "url": "https://github.com/frankxai/arcanea-core.git"
+      },
+      {
+        "name": "arcanea-templates",
+        "url": "https://github.com/frankxai/arcanea-templates.git"
+      },
+      {
+        "name": "arcanea-publishing-house",
+        "url": "https://github.com/frankxai/arcanea-publishing-house.git"
+      },
+      {
+        "name": "arcanea-author",
+        "url": "https://github.com/frankxai/arcanea-author.git"
+      },
+      {
+        "name": "arcanea-records",
+        "url": "https://github.com/frankxai/arcanea-records.git"
+      },
       {
         "name": "arcanea-infogenius",
-        "path": "../arcanea-infogenius",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-infogenius.git",
-        "description": "Visual intelligence and infographic systems",
-        "branch": "main",
-        "priority": "high",
-        "role": "vertical-product"
+        "url": "https://github.com/frankxai/arcanea-infogenius.git"
       },
       {
-        "name": "arcanea-onchain",
-        "path": "../arcanea-onchain",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-onchain.git",
-        "description": "Economic and onchain layer",
-        "branch": "main",
-        "priority": "high",
-        "role": "vertical-product"
+        "name": "arcanea-marketplace",
+        "url": "https://github.com/frankxai/arcanea-marketplace.git"
       },
-      {
-        "name": "arcanea-claw",
-        "path": "../arcanea-claw",
-        "mode": "external",
-        "url": "https://github.com/frankxai/arcanea-claw.git",
-        "description": "Media and creation workflows",
-        "branch": "main",
-        "priority": "medium",
-        "role": "vertical-product"
-      },
-      {
-        "name": "infogenius",
-        "path": "../infogenius",
-        "mode": "external",
-        "url": "https://github.com/frankxai/infogenius.git",
-        "description": "Information management system",
-        "branch": "main",
-        "priority": "medium",
-        "role": "support-system"
-      },
-      {
-        "name": "labs",
-        "path": "../labs",
-        "mode": "external",
-        "url": "https://github.com/Arcanea-Labs/Arcanea.git",
-        "description": "Experimental and research work",
-        "branch": "main",
-        "priority": "medium",
-        "role": "research"
-      }
-    ],
-    "legacy_foundation": [
       {
         "name": "arcanea-intelligence-os",
-        "path": "../arcanea-intelligence-os",
-        "mode": "external",
         "url": "https://github.com/frankxai/arcanea-intelligence-os.git",
-        "description": "Legacy intelligence-os line retained for historical and compatibility context",
-        "branch": "master",
-        "priority": "medium",
         "role": "legacy-foundation"
+      },
+      {
+        "name": "arcanea-mcp-starter",
+        "url": "https://github.com/frankxai/arcanea-mcp-starter.git"
+      }
+    ],
+    "broken_or_quarantine": [
+      {
+        "name": "arcanea-ai-app-production-worktree",
+        "path": "C:/Users/frank/starlight/repos/arcanea-ai-app-production-worktree",
+        "issue": "Not a git worktree of product; git resolves to starlight-command",
+        "disposition": "delete-candidate"
+      },
+      {
+        "name": "home-arcanea-studio",
+        "path": "C:/Users/frank/arcanea-studio",
+        "issue": "Diverged home duplicate",
+        "disposition": "archive-under-starlight-scratch"
+      },
+      {
+        "name": "universe",
+        "path": "C:/Users/frank/universe",
+        "issue": "Quarantined invented lore scratch",
+        "disposition": "never-ssot"
       }
     ]
   },
-  "dependencies": {
-    "arcanea": [
-      "arcanea-flow",
-      "arcanea-orchestrator",
-      "arcanea-code",
-      "oh-my-arcanea",
-      "claude-arcanea",
-      "codex-arcanea",
-      "gemini-arcanea",
-      "grok-arcanea",
-      "arcanea-infogenius",
-      "arcanea-onchain",
-      "arcanea-claw"
-    ],
-    "arcanea-flow": [
-      "arcanea-orchestrator",
-      "arcanea-code",
-      "claude-arcanea",
-      "codex-arcanea",
-      "gemini-arcanea"
-    ],
-    "arcanea-orchestrator": [
-      "arcanea-flow"
-    ],
-    "arcanea-code": [
-      "oh-my-arcanea",
-      "arcanea-opencode"
-    ]
+  "buildWhere": {
+    "product_ui_api": "arcanea-ai-app worktree from origin/main (prefer .worktrees/consolidate)",
+    "canon_lore": "arcanea-ai-app/.arcanea/lore",
+    "design_system": "arcanea-ai-app/packages/design-system",
+    "academy_site": "arcanea-academy",
+    "studio_product": "starlight/repos/arcanea-studio",
+    "media_engine": "arcanea-claw",
+    "generate_mcp": "starlight/repos/arcanea-mcp",
+    "worldbuilding_mcp": "arcanea-ai-app/packages/arcanea-mcp",
+    "orchestrator": "arcanea-orchestrator",
+    "ecosystem_docs": "arcanea-ecosystem",
+    "spellbound": "arcanea-spellbound",
+    "ops_receipts": "C:/Users/frank/starlight/queen/reports"
   },
-  "principles": {
-    "source_of_truth": "arcanea",
-    "orchestration_runtime": "arcanea-flow",
-    "execution_substrate": "arcanea-orchestrator",
-    "billing_data_and_graph": "supabase in arcanea",
-    "payment_strategy": "LemonSqueezy before BV if needed, Stripe later as primary long-term rail"
+  "dependencies": {
+    "arcanea-ai-app": [
+      "arcanea-orchestrator",
+      "arcanea-studio",
+      "arcanea-claw",
+      "arcanea-agent-skills",
+      "arcanea-ecosystem"
+    ],
+    "arcanea-studio": [
+      "arcanea-mcp-generate"
+    ],
+    "arcanea-orchestrator": []
   },
   "scripts": {
     "status": "node ./scripts/status-all.mjs",

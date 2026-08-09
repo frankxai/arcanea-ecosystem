@@ -1,3 +1,8 @@
+<!-- Constellation Routing 2026-08-09 -->
+**Live constellation:** [ARCANEA_CONSTELLATION_ROUTING.md](./ARCANEA_CONSTELLATION_ROUTING.md) · machine registry [`repos.json`](./repos.json) v3 · report `starlight/queen/reports/arcanea-constellation-map-2026-08-09.md`
+
+**Product SSOT:** `frankxai/arcanea-ai-app` (not public `frankxai/arcanea` mirror).
+
 # Arcanea Ecosystem
 
 > **Part of the wider [FrankX ecosystem](https://github.com/frankxai/frankxai/blob/main/ECOSYSTEM.md).** Arcanea is the creative-platform domain on the shared spine: **SIS** (memory) → **Hermes** (orchestration) → **ACOS** (operation).
