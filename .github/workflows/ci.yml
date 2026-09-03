@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  hooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      # These hooks run inside every agent session in this repo. A syntax error
+      # in one of them fails at hook time, which is the worst place to find it.
+      - name: Shell hooks parse
+        run: |
+          set -euo pipefail
+          find . -path ./node_modules -prune -o -name '*.sh' -print | while read -r f; do
+            echo "--- $f"; bash -n "$f"
+          done
+      - name: JS hooks parse
+        run: |
+          set -euo pipefail
+          find . -path ./node_modules -prune -o \( -name '*.js' -o -name '*.mjs' \) -print | while read -r f; do
+            echo "--- $f"; node --check "$f"
+          done
+      - name: JSON files parse
+        run: |
+          set -euo pipefail
+          find . -path ./node_modules -prune -o -name '*.json' -print | while read -r f; do
+            node -e "JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'))" "$f" || { echo "INVALID JSON: $f"; exit 1; }
+          done
