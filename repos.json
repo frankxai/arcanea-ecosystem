@@ -391,5 +391,75 @@
   "scripts": {
     "status": "node ./scripts/status-all.mjs",
     "sync": "node ./scripts/sync-all.mjs"
+  },
+  "harness_audit": {
+    "date": "2026-06-03",
+    "method": "Six-layer agent-harness build-out. Each repo: claimed-vs-verified, reproducible test, status grade. See HARNESS-REPORT.md.",
+    "tooling": {
+      "L2_primary": "deepeval (installed)",
+      "L4_redteam": "promptfoo (npx)",
+      "L5_observability": "BLOCKED — no container runtime (Langfuse self-host deferred)"
+    },
+    "repos": {
+      "claude-code-hooks": {
+        "profile": "C-Library",
+        "status": "SELLABLE",
+        "stack": [
+          "L1-ready",
+          "L2"
+        ],
+        "test": "test/run-hooks-tests.sh (47 assertions)",
+        "pr": "https://github.com/frankxai/claude-code-hooks/pull/1",
+        "last_verified": "2026-06-03",
+        "ci": "green"
+      },
+      "mcp-doctor": {
+        "profile": "A-MCP",
+        "status": "SELLABLE",
+        "stack": [
+          "L1-ready",
+          "L2"
+        ],
+        "test": "test/mcp-gauntlet.mjs (12 assertions, 4/4 tools)",
+        "pr": "https://github.com/frankxai/mcp-doctor/pull/1",
+        "last_verified": "2026-06-03",
+        "ci": "green"
+      },
+      "Starlight-Intelligence-System": {
+        "profile": "A-MCP+B",
+        "status": "SELLABLE",
+        "stack": [
+          "L1",
+          "L2",
+          "L3"
+        ],
+        "test": "test/v01-mcp-tools.test.ts (37/37); MCP boots 10 tools",
+        "pr": null,
+        "note": "build green after npm install (was missing typescript dep); MCP boots 10 tools",
+        "last_verified": "2026-06-03"
+      },
+      "agentic-creator-os": {
+        "profile": "B-SkillsAgents",
+        "status": "NEEDS-WORK",
+        "stack": [
+          "L0",
+          "L1-ready",
+          "L2"
+        ],
+        "test": "test/inventory-truth.mjs (165 skills, 150/165 valid frontmatter)",
+        "pr": "branch origin/harness/buildout-2026-06-03 (stacked on unpushed feat/workflow-tier)",
+        "last_verified": "2026-06-03",
+        "ci": "red-by-design (15 frontmatter files)"
+      },
+      "suno-mcp-server": {
+        "profile": "A-MCP",
+        "status": "README-ONLY",
+        "stack": [],
+        "test": null,
+        "note": "No implementation — README claims ~6 MCP tools, 0 present; bin points to nonexistent dist/index.js",
+        "last_verified": "2026-06-03"
+      }
+    },
+    "updated": "2026-06-04"
   }
 }
