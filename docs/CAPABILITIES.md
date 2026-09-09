@@ -65,3 +65,44 @@ explicitly and inspect enabled plugins through the relevant host CLI.
 
 Use [the Arcanea meta skill](../skills/arcanea-meta/SKILL.md) for the complete
 evidence and routing procedure.
+
+## Check installed skill delivery
+
+The deeper delivery audit follows explicit pack roots and the standard nested
+`skills/` layout, checks managed stub targets, and compares full skill bodies.
+Supply exact repository checkouts to include Git-listed source skills regardless
+of their names. This also lets you compare a release worktree with an installed
+pack without treating a different dirty checkout as the release source.
+
+```sh
+node scripts/audit-skill-delivery.mjs \
+  --skill-root /path/to/.agents/skills \
+  --skill-root /path/to/.claude/skills \
+  --pack-root /path/to/installed/arcanea-creative-worlds/version \
+  --repo /path/to/arcanea-agent-skills
+node --test tests/capability-audit.test.mjs tests/skill-delivery-audit.test.mjs
+```
+
+The report separates discovery entries, unique physical files, resolved stubs,
+missing local references, contextual repository commands, and different bodies
+sharing a name. A matching name does not itself prove a collision: hosts can
+namespace plugins or load different registries. Inspect the host's actual enabled
+plugin list separately. Do not overwrite a full skill or replace an unexpected
+junction based only on this report.
+
+Companion-qualified references are resolved against that companion on the same
+surface. Fenced examples, web links and commands are not executed. Structural
+metadata checks remain heuristics; the tool does not certify YAML, canon, model
+quality, provider availability or release readiness. Missing or unreadable input
+surfaces produce explicit errors and a nonzero CLI result. Save machine paths
+and inventory details privately before preparing a public summary.
+
+## World MCP repair candidate
+
+The canonical app now has separate draft runtime and package-delivery changes:
+[runtime review](https://github.com/frankxai/arcanea-ai-app/pull/380) and
+[package review](https://github.com/frankxai/arcanea-ai-app/pull/381), both requiring
+repository access. A packed 1.0.0 candidate passed an external installation with
+scripts disabled and a real save, restart and restore test. It is not a published
+npm replacement. The earlier 0.7.0 installation warning remains in force until a
+reviewed version is released and verified through the public registry.
