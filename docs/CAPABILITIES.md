@@ -20,6 +20,32 @@ probes do not establish a hosted service. A checked-out package with sibling lin
 does not establish npm availability. A public repository or HTTP 200 does not prove
 that its tools execute successfully.
 
+## Access and installation observations
+
+Checked on 2026-09-09; these observations are not a live availability feed.
+
+- `arcanea-agent-skills` and `arcanea-mcp-generate` are private repositories.
+  Their contributor instructions require access. An installed local pack does
+  not establish a public marketplace release.
+- The public npm manifest for
+  [`@arcanea/mcp-server@0.7.0`](https://registry.npmjs.org/@arcanea%2fmcp-server/0.7.0)
+  contains `@arcanea/os: workspace:*`. A fresh npm package-lock-only installation
+  with scripts disabled failed with `EUNSUPPORTEDPROTOCOL`. Do not advertise an
+  unpinned npx command as working until the replacement passes a consumer install.
+- The [public source mirror](https://github.com/frankxai/arcanea/tree/main/packages/arcanea-mcp)
+  and published npm artifact contain different revisions. Compare the actual
+  manifest, built CLI version and returned tool inventory rather than inferring
+  one from another.
+- The world-pack checker implementation is not present in the public mirror at
+  this date. Its recorded website examples require private source access to
+  reproduce. An MCP interface sketch is not an implemented adapter.
+
+For a new release, inspect the packed manifest for workspace, file and link
+dependencies, then perform an isolated consumer installation and a real stdio
+handshake without provider credentials. Keep these as separate evidence stages.
+Published metadata, installability, runtime discovery and useful tool behavior
+each need their own result.
+
 ## Repeat the inventory
 
 ```sh
