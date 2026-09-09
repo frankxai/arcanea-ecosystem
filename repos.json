@@ -2,16 +2,16 @@
   "ecosystem": "Arcanea",
   "version": "2.0.0",
   "description": "Portfolio registry for Arcanea platform, orchestration, runtimes, and vertical products",
-  "updated": "2026-06-12",
+  "updated": "2026-09-09",
   "repositories": {
     "platform": [
       {
         "name": "arcanea",
-        "path": "..",
+        "path": "../arcanea-ai-app",
         "mode": "external",
-        "url": "https://github.com/frankxai/arcanea.git",
-        "description": "Main Arcanea platform and control plane",
-        "branch": "integration/agent-control-plane-unification",
+        "url": "https://github.com/frankxai/arcanea-ai-app.git",
+        "description": "Canonical Arcanea product source; the public frankxai/arcanea mirror is separate",
+        "branch": "main",
         "priority": "critical",
         "role": "control-plane"
       },
@@ -114,7 +114,7 @@
         "path": "../grok-arcanea",
         "mode": "external",
         "url": "https://github.com/frankxai/grok-arcanea.git",
-        "description": "Grok (xAI) Arcanea harness — native Imagine image/video (v1.5+) for world canon (visualDna-anchored portraits/covers/scenes), structured world-repo builder via @arcanea/world-sdk + harness adapter, per-ecosystem creation engine + marketplace distribution; first-class for Grok users",
+        "description": "Grok (xAI) Arcanea harness \u00e2\u20ac\u201d native Imagine image/video (v1.5+) for world canon (visualDna-anchored portraits/covers/scenes), structured world-repo builder via @arcanea/world-sdk + harness adapter, per-ecosystem creation engine + marketplace distribution; first-class for Grok users",
         "branch": "main",
         "priority": "critical",
         "role": "runtime-harness"
@@ -225,7 +225,7 @@
     ]
   },
   "principles": {
-    "source_of_truth": "arcanea",
+    "source_of_truth": "arcanea-ai-app (logical registry id: arcanea)",
     "orchestration_runtime": "arcanea-flow",
     "execution_substrate": "arcanea-orchestrator",
     "billing_data_and_graph": "supabase in arcanea",
