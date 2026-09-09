@@ -10,6 +10,10 @@
 
 This repository is the portfolio registry for Arcanea.
 
+Start with the [capability and delivery map](docs/CAPABILITIES.md) to distinguish
+creator skills, MCP implementations, plugins and live documentation. The included
+read-only audits measure local source and installed-skill delivery.
+
 It is not the product source of truth. The product source of truth is the
 Arcanea platform repo and the standalone repos around it. This repo exists to:
 
